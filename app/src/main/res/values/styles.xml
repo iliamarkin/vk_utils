@@ -1,0 +1,36 @@
+<resources>
+
+    <style name="AppTheme" parent="Base.AppTheme">
+
+    </style>
+    <!-- Base application theme. -->
+    <style name="Base.AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="autoCompleteTextViewStyle">@style/CursorColor</item>
+    </style>
+
+    <style name="DarkButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="WhiteButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textColor">@color/color_text</item>
+    </style>
+    <style name="LightButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@color/color_light</item>
+        <item name="android:textColor">@color/color_text</item>
+    </style>
+
+    <style name="CursorColor" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:textCursorDrawable">@drawable/cursor</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+</resources>

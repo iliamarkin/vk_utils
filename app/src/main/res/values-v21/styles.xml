@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DarkButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="WhiteButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:backgroundTint">@android:color/white</item>
+        <item name="android:textColor">@color/color_text</item>
+    </style>
+
+    <style name="LightButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:backgroundTint">@color/color_light</item>
+        <item name="android:textColor">@color/color_text</item>
+    </style>
+
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>
