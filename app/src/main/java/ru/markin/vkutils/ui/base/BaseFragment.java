@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.arellomobile.mvp.MvpFragment;
+import com.arellomobile.mvp.MvpAppCompatFragment;
 
-
-public abstract class BaseFragment extends MvpFragment implements FragmentContent{
+public abstract class BaseFragment extends MvpAppCompatFragment implements FragmentContent{
 
     @Nullable
     @Override

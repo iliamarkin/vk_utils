@@ -1,7 +1,7 @@
 package ru.markin.vkutils.ui.screen.auth;
 
-import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 
@@ -30,6 +30,6 @@ public class AuthActivity extends BaseActivity implements AuthView {
 
         Button authButton = (Button) findViewById(R.id.activity_auth_button_auth);
         DialogFragment fragment = new AuthDialogFragment();
-        authButton.setOnClickListener(view -> fragment.show(getFragmentManager(), "Auth"));
+        authButton.setOnClickListener(view -> fragment.show(getSupportFragmentManager(), "Auth"));
     }
 }

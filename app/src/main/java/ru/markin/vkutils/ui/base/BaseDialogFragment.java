@@ -6,10 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.arellomobile.mvp.MvpAppCompatDialogFragment;
 import com.arellomobile.mvp.MvpDialogFragment;
 
 
-public abstract class BaseDialogFragment extends MvpDialogFragment implements FragmentContent {
+public abstract class BaseDialogFragment extends MvpAppCompatDialogFragment implements FragmentContent {
 
     @Nullable
     @Override

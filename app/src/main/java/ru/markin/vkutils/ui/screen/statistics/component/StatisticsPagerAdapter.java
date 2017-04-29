@@ -1,11 +1,11 @@
 package ru.markin.vkutils.ui.screen.statistics.component;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
-import ru.markin.vkutils.ui.screen.statistics.fragment.DialogsFragment;
-import ru.markin.vkutils.ui.screen.statistics.fragment.StatisticsFragment;
+import ru.markin.vkutils.ui.screen.statistics.fragment.dialogs.DialogsFragment;
+import ru.markin.vkutils.ui.screen.statistics.fragment.statistics.StatisticsFragment;
 
 public class StatisticsPagerAdapter extends FragmentStatePagerAdapter {
 

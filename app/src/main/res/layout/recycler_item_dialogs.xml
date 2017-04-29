@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/recycler_item_dialogs_default_photo"
+        android:src="@drawable/ic_default_user"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="5dp"
+        android:background="@null"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/recycler_item_dialogs_photo"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="5dp"
+        android:background="@null"/>
+    <TextView
+        android:id="@+id/recycler_item_dialogs_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_text"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/recycler_item_dialogs_photo"
+        android:singleLine="true"
+        android:textSize="18sp"
+        tools:ignore="Deprecated" />
+    <TextView
+        android:id="@+id/recycler_item_dialogs_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_secondaryText"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/recycler_item_dialogs_title"
+        android:layout_toRightOf="@id/recycler_item_dialogs_photo"
+        android:textSize="10sp"/>
+</RelativeLayout>

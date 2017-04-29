@@ -2,7 +2,7 @@ package ru.markin.vkutils.ui.screen.statistics;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
@@ -38,7 +38,7 @@ public class StatisticsActivity extends BaseActivity implements StatisticsView {
 
     private ViewPager getViewPager() {
         ViewPager pager = (ViewPager) findViewById(R.id.activity_stats_view_pager);
-        FragmentStatePagerAdapter adapter = new StatisticsPagerAdapter(getFragmentManager(),
+        FragmentStatePagerAdapter adapter = new StatisticsPagerAdapter(getSupportFragmentManager(),
                 presenter.getMessages(), presenter.getStatistics());
         pager.setAdapter(adapter);
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

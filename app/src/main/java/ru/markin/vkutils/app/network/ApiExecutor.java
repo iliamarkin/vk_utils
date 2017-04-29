@@ -12,6 +12,7 @@ import retrofit2.Response;
 import ru.markin.vkutils.app.network.gson.DialogList;
 
 public class ApiExecutor {
+
     private ApiService apiService;
 
     private Context context;
@@ -32,17 +33,6 @@ public class ApiExecutor {
                 .retry(3) : Observable.just(false);
     }
 
-    public void checkToken(String token, String secretKey, int appId, BadTokenListener badTokenListener) {
-        checkTokenObservable(token, secretKey, appId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(aBoolean -> Observable.just(isOnline() && aBoolean
-                        || isOnline() && aBoolean))
-                .subscribe(aBoolean -> {
-                    if (!aBoolean)
-                        badTokenListener.onBadToken();
-                });
-    }
-
     public Observable<Response<DialogList>> dialogsResponseObservable(String token, int offset) {
         return apiService.getDialogs(offset, token, "5.62")
                 .subscribeOn(Schedulers.io());
@@ -53,4 +43,19 @@ public class ApiExecutor {
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
+
+    public Observable<DialogList> getDialogsListObservable(String token, int offset) {
+        return apiService.getDialogs(offset, token, "5.62")
+                .subscribeOn(Schedulers.io())
+                .flatMap(dialogListResponse -> {
+                    if (dialogListResponse.isSuccessful()) {
+                        return Observable.just(dialogListResponse.body());
+                    }
+                    else {
+                        throw new RuntimeException();
+                    }
+                });
+    }
+
+
 }

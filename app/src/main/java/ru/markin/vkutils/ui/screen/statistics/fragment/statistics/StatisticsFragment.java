@@ -1,4 +1,4 @@
-package ru.markin.vkutils.ui.screen.statistics.fragment;
+package ru.markin.vkutils.ui.screen.statistics.fragment.statistics;
 
 
 import android.os.Bundle;
@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.markin.vkutils.R;
+import ru.markin.vkutils.presentation.view.statistics.StatisticsFragmentView;
 import ru.markin.vkutils.ui.base.BaseFragment;
 
-public class StatisticsFragment extends BaseFragment {
+public class StatisticsFragment extends BaseFragment implements StatisticsFragmentView {
 
 
     public StatisticsFragment() {}

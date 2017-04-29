@@ -13,7 +13,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.screen.launch.SplashActivity"
+        <activity
+            android:name=".ui.screen.launch.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.screen.auth.AuthActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name=".ui.screen.statistics.StatisticsActivity"
-            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".ui.screen.auth.AuthActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.screen.statistics.StatisticsActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".ui.screen.dialog.DialogActivity"></activity>
     </application>
 
 </manifest>
