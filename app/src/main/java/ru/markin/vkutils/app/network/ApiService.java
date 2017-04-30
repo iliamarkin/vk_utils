@@ -7,6 +7,7 @@ import retrofit2.http.Query;
 import ru.markin.vkutils.app.network.gson.AccessToken;
 import ru.markin.vkutils.app.network.gson.CheckToken;
 import ru.markin.vkutils.app.network.gson.DialogList;
+import ru.markin.vkutils.app.network.gson.SearchList;
 
 public interface ApiService {
 
@@ -26,4 +27,9 @@ public interface ApiService {
     Observable<Response<DialogList>> getDialogs(@Query("offset") int offset,
                                                 @Query("access_token") String token,
                                                 @Query("v") String version);
+
+    @GET("method/execute.searchDialogs")
+    Observable<Response<SearchList>> searchDialogs(@Query("q") String q,
+                                                   @Query("access_token") String token,
+                                                   @Query("v") String version);
 }

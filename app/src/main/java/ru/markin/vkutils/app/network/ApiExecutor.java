@@ -10,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 import ru.markin.vkutils.app.network.gson.DialogList;
+import ru.markin.vkutils.app.network.gson.SearchList;
 
 public class ApiExecutor {
 
@@ -57,5 +58,11 @@ public class ApiExecutor {
                 });
     }
 
-
+    public Observable<SearchList.Item> getSearchObservable(String token, String query) {
+        return apiService.searchDialogs(query, token, "5.63")
+                .subscribeOn(Schedulers.io())
+                .filter(Response::isSuccessful)
+                .flatMap(response -> Observable.fromIterable(response.body().getItems()))
+                .retry(3);
+    }
 }
