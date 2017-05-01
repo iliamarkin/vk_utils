@@ -1,10 +1,9 @@
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_stats_drawer_layout"
-    android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.CoordinatorLayout
@@ -17,16 +16,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
             <include layout="@layout/toolbar_statistics" />
+
             <android.support.design.widget.TabLayout
                 android:id="@+id/activity_stats_tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabGravity="fill"
-                app:tabMode="fixed"
                 app:tabIndicatorColor="@color/color_secondary"
+                app:tabMode="fixed"
                 app:tabSelectedTextColor="@android:color/white"
-                app:tabTextColor="@color/color_lightText"/>
+                app:tabTextColor="@color/color_lightText" />
         </android.support.design.widget.AppBarLayout>
 
         <ViewFlipper
@@ -39,7 +40,7 @@
                 android:id="@+id/activity_stats_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             <ViewFlipper
                 android:id="@+id/activity_stats_flipper_search"
@@ -50,13 +51,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"/>
+                    android:layout_marginTop="30dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/activity_stats_recycler_view_search"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scrollbars="vertical"/>
+                    android:scrollbars="vertical" />
             </ViewFlipper>
 
         </ViewFlipper>
@@ -71,5 +72,5 @@
         app:headerLayout="@layout/navigation_header_activity_statistics"
         app:itemIconTint="#2196f3"
         app:itemTextColor="#009688"
-        app:menu="@menu/drawer_activity_statistics"/>
+        app:menu="@menu/drawer_activity_statistics" />
 </android.support.v4.widget.DrawerLayout>

@@ -4,29 +4,33 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     tools:context="ru.markin.vkutils.ui.screen.statistics.fragment.dialogs.DialogsFragment">
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/fragment_dialogs_swipe_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <ViewFlipper
             android:id="@+id/fragment_dialogs_flipper_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/fragment_dialogs_recycler_view_dialogs"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="vertical">
-            </android.support.v7.widget.RecyclerView>
+                android:scrollbars="vertical"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/fragment_dialogs_text_view_empty"/>
+                android:text="@string/fragment_dialogs_text_view_empty" />
         </ViewFlipper>
     </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>
