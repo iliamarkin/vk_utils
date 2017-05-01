@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/statistics_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_first_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginTop="@dimen/activity_dialog_text_view_values_margin"
+        android:text="@string/statistics_text_view_duration"
+        android:textSize="@dimen/activity_dialog_text_view_secondary_title_size"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginTop="@dimen/activity_dialog_text_view_values_margin" />
+
+    <TextView
+        android:id="@+id/statistics_last_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_first_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginTop="@dimen/activity_dialog_text_view_values_margin"
+        android:text="@string/statistics_text_view_last_activity"
+        android:textSize="@dimen/activity_dialog_text_view_secondary_title_size"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_last_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginTop="@dimen/activity_dialog_text_view_values_margin" />
+
+    <TextView
+        android:id="@+id/statistics_count_per_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_first_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginTop="@dimen/activity_dialog_text_view_values_margin"
+        android:text="@string/statistics_text_view_week_count"
+        android:textSize="@dimen/activity_dialog_text_view_secondary_title_size"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_all_messages_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginTop="@dimen/activity_dialog_text_view_values_margin" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_input_messages_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_output_messages_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin" />
+
+    <TextView
+        android:id="@+id/statistics_count_per_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_first_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginTop="@dimen/activity_dialog_text_view_values_margin"
+        android:text="@string/statistics_text_view_day_count"
+        android:textSize="@dimen/activity_dialog_text_view_secondary_title_size"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_all_messages_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginTop="@dimen/activity_dialog_text_view_values_margin" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_input_messages_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_output_messages_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin" />
+
+    <TextView
+        android:id="@+id/statistics_count_per_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_first_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginTop="@dimen/activity_dialog_text_view_values_margin"
+        android:text="@string/statistics_text_view_hour_count"
+        android:textSize="@dimen/activity_dialog_text_view_secondary_title_size"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_all_messages_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginTop="@dimen/activity_dialog_text_view_values_margin" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_input_messages_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin" />
+
+    <TextView
+        android:id="@+id/statistics_text_view_output_messages_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_dialog_text_view_values_margin"
+        android:layout_marginLeft="@dimen/activity_dialog_text_view_second_level_margin"
+        android:layout_marginRight="@dimen/activity_dialog_text_view_values_margin" />
+</LinearLayout>

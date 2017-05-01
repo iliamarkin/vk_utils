@@ -28,7 +28,10 @@
         <activity
             android:name=".ui.screen.statistics.StatisticsActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".ui.screen.dialog.DialogActivity"></activity>
+        <activity
+            android:name=".ui.screen.dialog.DialogActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="" />
     </application>
 
 </manifest>

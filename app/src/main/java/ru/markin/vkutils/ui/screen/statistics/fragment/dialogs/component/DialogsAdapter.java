@@ -15,6 +15,7 @@ import lombok.Setter;
 import ru.markin.vkutils.R;
 import ru.markin.vkutils.common.Dialog;
 import ru.markin.vkutils.common.Util;
+import ru.markin.vkutils.common.Value;
 import ru.markin.vkutils.ui.screen.dialog.DialogActivity;
 
 public class DialogsAdapter extends RecyclerView.Adapter {
@@ -72,9 +73,9 @@ public class DialogsAdapter extends RecyclerView.Adapter {
     private void initItemClickListener(View itemView, Dialog dialog) {
         itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, DialogActivity.class);
-            intent.putExtra("id", dialog.getId());
-            intent.putExtra("title", dialog.getName());
-            intent.putExtra("photo", dialog.getPhoto());
+            intent.putExtra(Value.INTENT_ID, dialog.getId());
+            intent.putExtra(Value.INTENT_TITLE, dialog.getName());
+            intent.putExtra(Value.INTENT_PHOTO, dialog.getPhoto());
             context.startActivity(intent);
         });
     }

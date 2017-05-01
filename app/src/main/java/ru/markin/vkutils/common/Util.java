@@ -1,6 +1,7 @@
 package ru.markin.vkutils.common;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -14,6 +15,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,6 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import ru.markin.vkutils.R;
 
 public class Util {
 
@@ -197,5 +201,60 @@ public class Util {
             dateText = getDateText(date);
         }
         return dateText;
+    }
+
+    public static String getPeriod(Resources resources, long firstDate, long lastDate) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Period period = new Period(firstDate, lastDate, PeriodType.yearMonthDayTime());
+        int year = period.getYears();
+        int month = period.getMonths();
+        int day = period.getDays();
+        int hour = period.getHours();
+        int minute = period.getMinutes();
+        stringBuilder.append(getYearsText(resources, year))
+                .append(' ')
+                .append(getMonthsText(resources, month))
+                .append(' ')
+                .append(getDaysText(resources, day))
+                .append(' ')
+                .append(getHoursText(resources, hour))
+                .append(' ')
+                .append(getMinutesText(resources, minute));
+        return stringBuilder.toString();
+    }
+
+    private static String getYearsText(Resources resources, int year) {
+        if (year != 0) {
+            return resources.getQuantityString(R.plurals.years, year, year);
+        }
+        return "";
+    }
+
+    private static String getMonthsText(Resources resources, int month) {
+        if (month != 0) {
+            return resources.getQuantityString(R.plurals.months, month, month);
+        }
+        return "";
+    }
+
+    private static String getDaysText(Resources resources, int day) {
+        if (day != 0) {
+            return resources.getQuantityString(R.plurals.days, day, day);
+        }
+        return "";
+    }
+
+    private static String getHoursText(Resources resources, int hour) {
+        if (hour != 0) {
+            return resources.getQuantityString(R.plurals.hours, hour, hour);
+        }
+        return "";
+    }
+
+    private static String getMinutesText(Resources resources, int minute) {
+        if (minute != 0) {
+            return resources.getQuantityString(R.plurals.minutes, minute, minute);
+        }
+        return "";
     }
 }

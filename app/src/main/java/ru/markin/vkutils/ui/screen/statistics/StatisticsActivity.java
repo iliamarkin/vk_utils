@@ -20,8 +20,6 @@ import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import ru.markin.vkutils.R;
 import ru.markin.vkutils.common.Dialog;
 import ru.markin.vkutils.presentation.presenter.statistics.StatisticsPresenter;
@@ -143,6 +141,5 @@ public class StatisticsActivity extends BaseActivity implements StatisticsView {
         RxSearchView.queryTextChanges(searchView)
                 .debounce(200, TimeUnit.MILLISECONDS)
                 .subscribe(presenter::search);
-
     }
 }
