@@ -12,16 +12,19 @@ import ru.markin.vkutils.scope.PerScreen;
 @Module
 public class StatisticsModule {
 
+    public static final String MESSAGES = "messages";
+    public static final String STATISTICS = "statistics";
+
     @PerScreen
     @Provides
-    @Named("messages")
+    @Named(MESSAGES)
     String provideMessage(Resources resources) {
         return resources.getString(R.string.activity_stats_tab_layout_messages);
     }
 
     @PerScreen
     @Provides
-    @Named("statistics")
+    @Named(STATISTICS)
     String provideStatistics(Resources resources) {
         return resources.getString(R.string.activity_stats_tab_layout_statistics);
     }

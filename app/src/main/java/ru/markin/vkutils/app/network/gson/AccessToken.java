@@ -14,5 +14,6 @@ public class AccessToken {
 
     @SerializedName("expires_in")
     @Expose
-    @Getter private long expiresIn;
+    @Getter
+    private long expiresIn;
 }

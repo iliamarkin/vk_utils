@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="StatisticsView">
-        <attr name="mainTextColor" format="color"/>
-        <attr name="secondaryTextColor" format="color"/>
+        <attr name="mainTextColor" format="color" />
+        <attr name="secondaryTextColor" format="color" />
     </declare-styleable>
 </resources>

@@ -3,9 +3,11 @@ package ru.markin.vkutils.app.network.gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 import lombok.Getter;
 
-public class CheckToken {
+public class History {
 
     @SerializedName("response")
     @Expose
@@ -13,24 +15,28 @@ public class CheckToken {
     private Response response;
 
     public static class Response {
-        @SerializedName("success")
-        @Expose
-        @Getter
-        private int success;
 
-        @SerializedName("user_id")
+        @SerializedName("count")
         @Expose
         @Getter
-        private long userId;
+        private int count;
+
+        @SerializedName("items")
+        @Expose
+        @Getter
+        private List<Item> items = null;
+    }
+
+    public static class Item {
 
         @SerializedName("date")
         @Expose
         @Getter
         private long date;
 
-        @SerializedName("expire")
+        @SerializedName("out")
         @Expose
         @Getter
-        private long expire;
+        private int out;
     }
 }

@@ -6,7 +6,7 @@ import ru.markin.vkutils.presentation.presenter.dialog.DialogPresenter;
 import ru.markin.vkutils.scope.PerScreen;
 
 @PerScreen
-@Component(dependencies = {AppComponent.class})
+@Component(dependencies = {AppComponent.class}, modules = {DialogModule.class})
 public interface DialogComponent {
 
     void inject(DialogPresenter presenter);

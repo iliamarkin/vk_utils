@@ -1,23 +1,28 @@
 package ru.markin.vkutils.app.network;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
+import java.io.IOException;
+
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
+import ru.markin.vkutils.app.network.gson.DialogInfo;
 import ru.markin.vkutils.app.network.gson.DialogList;
+import ru.markin.vkutils.app.network.gson.History;
 import ru.markin.vkutils.app.network.gson.SearchList;
+import ru.markin.vkutils.app.network.util.LongAndInt;
 
 public class ApiExecutor {
 
-    private ApiService apiService;
+    private final ApiService apiService;
+    private final Context context;
 
-    private Context context;
-
+    @SuppressLint("UseSparseArrays")
     public ApiExecutor(ApiService apiService, Context context) {
         this.apiService = apiService;
         this.context = context;
@@ -64,6 +69,56 @@ public class ApiExecutor {
                 .filter(Response::isSuccessful)
                 .flatMap(response -> Observable.fromIterable(response.body().getItems()))
                 .retry(3);
+    }
+
+    public long getFirstDate(String token, int id) {
+        try {
+            Response<History> response = apiService.getHistory(1, id, 1, token, "5.63").execute();
+            return response.isSuccessful() ? response.body().getResponse().getItems().get(0).getDate() * 1000 : -1;
+        } catch (IOException ignore) {}
+        return -1;
+    }
+
+    public long getLastDate(String token, int id) {
+        try {
+            Response<History> response = apiService.getHistory(1, id, 0, token, "5.63").execute();
+            return response.isSuccessful() ? response.body().getResponse().getItems().get(0).getDate() * 1000 : -1;
+        } catch (IOException ignore) {}
+        return -1;
+    }
+
+    public LongAndInt getFirstDateWithCount(String token, int id) {
+        try {
+            Response<History> response = apiService.getHistory(1, id, 1, token, "5.63").execute();
+            if (response.isSuccessful()) {
+                long date = response.body().getResponse().getItems().get(0).getDate() * 1000;
+                int count = response.body().getResponse().getCount();
+                return new LongAndInt(date, count);
+            }
+        } catch (IOException ignore) {}
+        return new LongAndInt(-1, -1);
+    }
+
+    public LongAndInt getLastDateWithCount(String token, int id) {
+        try {
+            Response<History> response = apiService.getHistory(1, id, 0, token, "5.63").execute();
+            if (response.isSuccessful()) {
+                long date = response.body().getResponse().getItems().get(0).getDate() * 1000;
+                int count = response.body().getResponse().getCount();
+                return new LongAndInt(date, count);
+            }
+        } catch (IOException ignore) {}
+        return new LongAndInt(-1, -1);
+    }
+
+    public DialogInfo getDialogInfo(String token, int id, int offset) {
+        try {
+            Response<DialogInfo> response = apiService.getDialogInfo(offset, id, token, "5.63").execute();
+            if (response.isSuccessful()) {
+                return response.body();
+            }
+        } catch (IOException ignore) {}
+        return null;
     }
 
 

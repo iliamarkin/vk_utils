@@ -9,6 +9,11 @@ import lombok.Getter;
 
 public class DialogList {
 
+    @SerializedName("response")
+    @Expose
+    @Getter
+    private Data data = null;
+
     public static class Data {
 
         @SerializedName("count")
@@ -18,33 +23,35 @@ public class DialogList {
 
         @SerializedName("items")
         @Expose
-        @Getter private List<Item> items = null;
+        @Getter
+        private List<Item> items = null;
     }
 
     public static class Item {
 
         @SerializedName("type")
         @Expose
-        @Getter private String type;
+        @Getter
+        private String type;
 
         @SerializedName("id")
         @Expose
-        @Getter private Integer id;
+        @Getter
+        private Integer id;
 
         @SerializedName("title")
         @Expose
-        @Getter private String title;
+        @Getter
+        private String title;
 
         @SerializedName("date")
         @Expose
-        @Getter private Long date;
+        @Getter
+        private Long date;
 
         @SerializedName("photo")
         @Expose
-        @Getter private String photo;
+        @Getter
+        private String photo;
     }
-
-    @SerializedName("response")
-    @Expose
-    @Getter private Data data = null;
 }

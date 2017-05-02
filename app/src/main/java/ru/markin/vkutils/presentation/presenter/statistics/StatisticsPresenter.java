@@ -19,17 +19,18 @@ import ru.markin.vkutils.presentation.base.BasePresenter;
 import ru.markin.vkutils.presentation.view.statistics.StatisticsView;
 import ru.markin.vkutils.ui.screen.statistics.DaggerStatisticsComponent;
 import ru.markin.vkutils.ui.screen.statistics.StatisticsComponent;
+import ru.markin.vkutils.ui.screen.statistics.StatisticsModule;
 
 @InjectViewState
 public class StatisticsPresenter extends BasePresenter<StatisticsView> {
 
     @Inject
-    @Named("messages")
+    @Named(StatisticsModule.MESSAGES)
     @Getter
     String messages;
 
     @Inject
-    @Named("statistics")
+    @Named(StatisticsModule.STATISTICS)
     @Getter
     String statistics;
 

@@ -23,6 +23,7 @@ import ru.markin.vkutils.presentation.base.BasePresenter;
 import ru.markin.vkutils.presentation.view.statistics.DialogsFragmentView;
 import ru.markin.vkutils.ui.screen.statistics.fragment.dialogs.DaggerDialogsFragmentComponent;
 import ru.markin.vkutils.ui.screen.statistics.fragment.dialogs.DialogsFragmentComponent;
+import ru.markin.vkutils.ui.screen.statistics.fragment.dialogs.DialogsFragmentModule;
 
 @InjectViewState
 public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView> {
@@ -30,10 +31,10 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
     private final String token;
     private final List<Dialog> dialogs;
     @Inject
-    @Named("today")
+    @Named(DialogsFragmentModule.TODAY)
     String todayText;
     @Inject
-    @Named("yesterday")
+    @Named(DialogsFragmentModule.YESTERDAY)
     String yesterdayText;
     @Inject
     int appId;

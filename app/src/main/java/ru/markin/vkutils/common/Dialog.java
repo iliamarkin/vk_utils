@@ -38,9 +38,19 @@ public class Dialog implements Comparable<Dialog> {
         this.dateText = dateText;
     }
 
-
     @Override
     public int compareTo(Dialog o) {
         return this.id < o.id ? -1 : this.id == o.id ? 0 : 1;
+    }
+
+    @Override
+    public String toString() {
+        return "Dialog{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", photo='" + photo + '\'' +
+                ", date=" + date +
+                ", dateText='" + dateText + '\'' +
+                '}';
     }
 }

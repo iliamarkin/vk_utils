@@ -4,5 +4,11 @@ import com.arellomobile.mvp.MvpView;
 
 public interface DialogView extends MvpView {
 
-    void setInformation(int count, int inputCount, int outputCount, long firstDate, long lastDate);
+    void setInformation(int count, int incomingCount, int outgoingCount, long firstDate, long lastDate);
+
+    void doOnReady();
+
+    void doOnEmpty();
+
+    void doOnUpdated();
 }
