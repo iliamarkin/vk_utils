@@ -10,5 +10,5 @@ public interface DialogView extends MvpView {
 
     void doOnEmpty();
 
-    void doOnUpdated();
+    void hideRefreshLayoutProgressBar();
 }

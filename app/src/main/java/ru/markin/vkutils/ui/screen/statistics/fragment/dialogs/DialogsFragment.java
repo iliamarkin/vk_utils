@@ -63,10 +63,9 @@ public class DialogsFragment extends BaseFragment implements DialogsFragmentView
     }
 
     @Override
-    public void doOnLoad(List<Dialog> dialogs, int dialogsCount) {
+    public void doOnLoaded(List<Dialog> dialogs, int dialogsCount) {
         adapter.setDialogsCount(dialogsCount);
         adapter.addAll(dialogs);
-        flipper.setDisplayedChild(1);
     }
 
     @Override
@@ -79,6 +78,15 @@ public class DialogsFragment extends BaseFragment implements DialogsFragmentView
     public void doOnUpdate(List<Dialog> dialogs, int dialogsCount) {
         adapter.setDialogsCount(dialogsCount);
         adapter.updateAllItems(dialogs);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        flipper.setDisplayedChild(1);
+    }
+
+    @Override
+    public void hideRefreshLayoutProgressBar() {
         refreshLayout.setRefreshing(false);
     }
 

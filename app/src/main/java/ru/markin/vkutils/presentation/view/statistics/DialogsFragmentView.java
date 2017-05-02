@@ -8,11 +8,15 @@ import ru.markin.vkutils.common.Dialog;
 
 public interface DialogsFragmentView extends MvpView {
 
-    void doOnLoad(List<Dialog> dialogs, int dialogsCount);
+    void doOnLoaded(List<Dialog> dialogs, int dialogsCount);
 
     void doOnLoadMore(List<Dialog> dialogs, int dialogsCount);
 
     void doOnUpdate(List<Dialog> dialogs, int dialogsCount);
+
+    void hideProgressBar();
+
+    void hideRefreshLayoutProgressBar();
 
     void doOnEmptyDialogs();
 

@@ -117,7 +117,7 @@ public class DialogActivity extends BaseActivity implements DialogView {
     }
 
     @Override
-    public void doOnUpdated() {
+    public void hideRefreshLayoutProgressBar() {
         refreshLayout.setRefreshing(false);
     }
 

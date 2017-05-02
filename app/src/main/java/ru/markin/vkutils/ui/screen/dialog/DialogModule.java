@@ -18,7 +18,6 @@ public class DialogModule {
     public static final String FIRST_DATE = "firstDate";
     public static final String LAST_DATE = "lastDate";
 
-
     @PerScreen
     @Provides
     @Named(ALL)

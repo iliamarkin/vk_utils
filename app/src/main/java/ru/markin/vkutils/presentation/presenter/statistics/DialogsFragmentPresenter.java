@@ -45,7 +45,9 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
     @Inject
     ApiExecutor apiExecutor;
 
-    @Getter private volatile boolean loading = true;
+    @Getter
+    private volatile boolean loading = true;
+    private boolean isLoaded = false;
 
     private int dialogsCount = 0;
 
@@ -69,38 +71,40 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
 
     public void loadMoreDialogs() {
         if (apiExecutor.isOnline()) {
-            getDialogs(dialogs.size())
-                    .subscribe((dialogsResult, e) -> {
-                        if (checkResult(dialogsResult)) {
-                            getViewState().doOnLoadMore(dialogsResult, dialogsCount);
-                        }
-                    });
+            getDialogs(dialogs.size()).subscribe((dialogsResult, e) -> {
+                if (checkResult(dialogsResult)) {
+                    getViewState().doOnLoadMore(dialogsResult, dialogsCount);
+                }
+            });
         }
     }
 
     private void loadDialogs() {
         if (apiExecutor.isOnline()) {
-                    getDialogs(0)
-                    .subscribe(dialogsResult -> {
-                        if (checkResult(dialogsResult)) {
-                            getViewState().doOnLoad(dialogsResult, dialogsCount);
-                        }
-                    }, e -> checkToken());
+            getDialogs(0).subscribe(dialogsResult -> {
+                if (checkResult(dialogsResult)) {
+                    isLoaded = true;
+                    getViewState().doOnLoaded(dialogsResult, dialogsCount);
+                    getViewState().hideProgressBar();
+                }
+            }, e -> checkToken());
         } else {
             //load from DB
         }
     }
 
     public void updateDialogs() {
-        if (apiExecutor.isOnline()) {
-            getDialogs(0)
-                    .subscribe(dialogsResult -> {
-                        dialogs.clear();
-                        if (checkResult(dialogsResult)) {
-                            getViewState().doOnUpdate(dialogsResult, dialogsCount);
-                        }
-                    }, e -> checkToken());
+        if (isLoaded) {
+            if (apiExecutor.isOnline()) {
+                getDialogs(0).subscribe(dialogsResult -> {
+                    dialogs.clear();
+                    if (checkResult(dialogsResult)) {
+                        getViewState().doOnUpdate(dialogsResult, dialogsCount);
+                    }
+                }, e -> checkToken());
+            }
         }
+        getViewState().hideRefreshLayoutProgressBar();
     }
 
     private boolean checkResult(List<Dialog> dialogs) {

@@ -53,7 +53,7 @@ public class DialogPresenter extends BasePresenter<DialogView> {
     @Inject
     SharedPreferences sharedPreferences;
     private boolean stop = false;
-
+    private boolean isLoaded = false;
 
     public DialogPresenter(int id) {
         this.id = id;
@@ -78,6 +78,7 @@ public class DialogPresenter extends BasePresenter<DialogView> {
             if (inf.count > 0) {
                 getViewState().setInformation(inf.count, inf.incomingCount, inf.outgoingCount, inf.firstDate, inf.lastDate);
                 getViewState().doOnReady();
+                isLoaded = true;
             } else {
                 getViewState().doOnEmpty();
             }
@@ -85,14 +86,16 @@ public class DialogPresenter extends BasePresenter<DialogView> {
     }
 
     public void updateData() {
-        load().subscribe(inf -> {
-            if (inf.count > 0) {
-                getViewState().setInformation(inf.count, inf.incomingCount, inf.outgoingCount, inf.firstDate, inf.lastDate);
-                getViewState().doOnUpdated();
-            } else {
-                getViewState().doOnEmpty();
-            }
-        });
+        if (isLoaded) {
+            load().subscribe(inf -> {
+                if (inf.count > 0) {
+                    getViewState().setInformation(inf.count, inf.incomingCount, inf.outgoingCount, inf.firstDate, inf.lastDate);
+                } else {
+                    getViewState().doOnEmpty();
+                }
+            });
+        }
+        getViewState().hideRefreshLayoutProgressBar();
     }
 
     private Observable<Information> load() {
