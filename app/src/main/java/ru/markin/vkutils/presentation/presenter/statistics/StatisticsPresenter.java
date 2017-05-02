@@ -24,26 +24,22 @@ import ru.markin.vkutils.ui.screen.statistics.StatisticsModule;
 @InjectViewState
 public class StatisticsPresenter extends BasePresenter<StatisticsView> {
 
+    private final String token;
     @Inject
     @Named(StatisticsModule.MESSAGES)
     @Getter
     String messages;
-
     @Inject
     @Named(StatisticsModule.STATISTICS)
     @Getter
     String statistics;
-
     @Inject
     ApiExecutor apiExecutor;
-
     @Inject
     SharedPreferences sharedPreferences;
 
-    private final String token;
-
     public StatisticsPresenter() {
-        token = getTokenFromSharedPreference();
+        token = sharedPreferences.getString(App.TOKEN_KEY, "");
     }
 
     @Override
@@ -77,9 +73,5 @@ public class StatisticsPresenter extends BasePresenter<StatisticsView> {
 
     private Dialog createDialog(SearchList.Item item) {
         return new Dialog(item.getId(), item.getTitle(), item.getPhoto());
-    }
-
-    private String getTokenFromSharedPreference() {
-        return sharedPreferences.getString(App.TOKEN_KEY, "");
     }
 }

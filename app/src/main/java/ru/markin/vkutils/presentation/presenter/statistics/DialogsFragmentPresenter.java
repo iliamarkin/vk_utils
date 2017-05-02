@@ -28,8 +28,6 @@ import ru.markin.vkutils.ui.screen.statistics.fragment.dialogs.DialogsFragmentMo
 @InjectViewState
 public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView> {
 
-    private final String token;
-    private final List<Dialog> dialogs;
     @Inject
     @Named(DialogsFragmentModule.TODAY)
     String todayText;
@@ -48,11 +46,13 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
     @Getter
     private volatile boolean loading = true;
     private boolean isLoaded = false;
+    private final String token;
+    private final List<Dialog> dialogs;
 
     private int dialogsCount = 0;
 
     public DialogsFragmentPresenter() {
-        token = getTokenFromSharedPreference();
+        token = sharedPreferences.getString(App.TOKEN_KEY, "");
         dialogs = new ArrayList<>();
         loadDialogs();
     }
@@ -143,9 +143,5 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
         long date = item.getDate() * 1000;
         String dateText = Util.getAdvancedDateText(date, todayText, yesterdayText);
         return new Dialog(item.getId(), item.getTitle(), item.getPhoto(), date, dateText);
-    }
-
-    private String getTokenFromSharedPreference() {
-        return sharedPreferences.getString(App.TOKEN_KEY, "");
     }
 }

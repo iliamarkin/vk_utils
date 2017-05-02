@@ -1,6 +1,5 @@
 package ru.markin.vkutils.presentation.presenter.launch;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -19,13 +18,17 @@ import ru.markin.vkutils.ui.screen.launch.SplashComponent;
 @InjectViewState
 public class SplashPresenter extends BasePresenter<SplashView> {
 
-    @Inject ApiExecutor apiExecutor;
+    @Inject
+    ApiExecutor apiExecutor;
 
-    @Inject int appId;
+    @Inject
+    int appId;
 
-    @Inject String secretKey;
+    @Inject
+    String secretKey;
 
-    @Inject SharedPreferences sharedPreferences;
+    @Inject
+    SharedPreferences sharedPreferences;
 
     public SplashPresenter() {
         showScreen();
@@ -54,11 +57,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     }
 
     private Observable<Boolean> checkTokenObservable() {
-        String token = getTokenFromSharedPreference();
+        String token = sharedPreferences.getString(App.TOKEN_KEY, "");
         return apiExecutor.checkTokenObservable(token, secretKey, appId);
-    }
-
-    private String getTokenFromSharedPreference() {
-        return sharedPreferences.getString(App.TOKEN_KEY, "");
     }
 }
