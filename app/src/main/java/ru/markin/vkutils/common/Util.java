@@ -212,41 +212,37 @@ public class Util {
         int hour = period.getHours();
         int minute = period.getMinutes();
         stringBuilder.append(getYearsText(resources, year))
-                .append(' ')
                 .append(getMonthsText(resources, month))
-                .append(' ')
                 .append(getDaysText(resources, day))
-                .append(' ')
                 .append(getHoursText(resources, hour))
-                .append(' ')
                 .append(getMinutesText(resources, minute));
         return stringBuilder.toString();
     }
 
     private static String getYearsText(Resources resources, int year) {
         if (year != 0) {
-            return resources.getQuantityString(R.plurals.years, year, year);
+            return resources.getQuantityString(R.plurals.years, year, year) + " ";
         }
         return "";
     }
 
     private static String getMonthsText(Resources resources, int month) {
         if (month != 0) {
-            return resources.getQuantityString(R.plurals.months, month, month);
+            return resources.getQuantityString(R.plurals.months, month, month) + " ";
         }
         return "";
     }
 
     private static String getDaysText(Resources resources, int day) {
         if (day != 0) {
-            return resources.getQuantityString(R.plurals.days, day, day);
+            return resources.getQuantityString(R.plurals.days, day, day) + " ";
         }
         return "";
     }
 
     private static String getHoursText(Resources resources, int hour) {
         if (hour != 0) {
-            return resources.getQuantityString(R.plurals.hours, hour, hour);
+            return resources.getQuantityString(R.plurals.hours, hour, hour) + " ";
         }
         return "";
     }

@@ -14,8 +14,6 @@ public interface DialogsFragmentView extends MvpView {
 
     void doOnUpdate(List<Dialog> dialogs, int dialogsCount);
 
-    void hideProgressBar();
-
     void hideRefreshLayoutProgressBar();
 
     void doOnEmptyDialogs();

@@ -85,7 +85,6 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
                 if (checkResult(dialogsResult)) {
                     isLoaded = true;
                     getViewState().doOnLoaded(dialogsResult, dialogsCount);
-                    getViewState().hideProgressBar();
                 }
             }, e -> checkToken());
         } else {
@@ -100,11 +99,13 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
                     dialogs.clear();
                     if (checkResult(dialogsResult)) {
                         getViewState().doOnUpdate(dialogsResult, dialogsCount);
+                        getViewState().hideRefreshLayoutProgressBar();
                     }
                 }, e -> checkToken());
             }
+        } else {
+            getViewState().hideRefreshLayoutProgressBar();
         }
-        getViewState().hideRefreshLayoutProgressBar();
     }
 
     private boolean checkResult(List<Dialog> dialogs) {

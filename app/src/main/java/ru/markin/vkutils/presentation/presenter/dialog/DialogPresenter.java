@@ -93,9 +93,11 @@ public class DialogPresenter extends BasePresenter<DialogView> {
                 } else {
                     getViewState().doOnEmpty();
                 }
+                getViewState().hideRefreshLayoutProgressBar();
             });
+        } else {
+            getViewState().hideRefreshLayoutProgressBar();
         }
-        getViewState().hideRefreshLayoutProgressBar();
     }
 
     private Observable<Information> load() {
