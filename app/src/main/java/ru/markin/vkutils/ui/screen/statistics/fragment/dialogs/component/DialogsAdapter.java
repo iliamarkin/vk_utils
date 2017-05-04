@@ -13,9 +13,9 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import ru.markin.vkutils.R;
-import ru.markin.vkutils.common.Dialog;
-import ru.markin.vkutils.common.Util;
-import ru.markin.vkutils.common.Value;
+import ru.markin.vkutils.common.util.Dialog;
+import ru.markin.vkutils.common.util.Util;
+import ru.markin.vkutils.common.util.Value;
 import ru.markin.vkutils.ui.screen.dialog.DialogActivity;
 
 public class DialogsAdapter extends RecyclerView.Adapter {

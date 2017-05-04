@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ru.markin.vkutils.R;
-import ru.markin.vkutils.common.Dialog;
+import ru.markin.vkutils.common.util.Dialog;
 import ru.markin.vkutils.presentation.presenter.statistics.DialogsFragmentPresenter;
 import ru.markin.vkutils.presentation.view.statistics.DialogsFragmentView;
 import ru.markin.vkutils.ui.base.BaseFragment;

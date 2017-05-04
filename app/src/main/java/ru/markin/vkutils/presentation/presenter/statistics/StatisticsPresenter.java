@@ -14,7 +14,7 @@ import lombok.Getter;
 import ru.markin.vkutils.app.App;
 import ru.markin.vkutils.common.network.ApiExecutor;
 import ru.markin.vkutils.common.network.gson.SearchList;
-import ru.markin.vkutils.common.Dialog;
+import ru.markin.vkutils.common.util.Dialog;
 import ru.markin.vkutils.presentation.base.BasePresenter;
 import ru.markin.vkutils.presentation.view.statistics.StatisticsView;
 import ru.markin.vkutils.ui.screen.statistics.DaggerStatisticsComponent;

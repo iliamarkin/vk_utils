@@ -4,8 +4,6 @@ import android.content.SharedPreferences;
 
 import com.arellomobile.mvp.InjectViewState;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,7 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 import lombok.Getter;
 import ru.markin.vkutils.app.App;
 import ru.markin.vkutils.common.network.ApiExecutor;
-import ru.markin.vkutils.common.network.gson.DialogInfo;
+import ru.markin.vkutils.common.network.util.IntAndInt;
 import ru.markin.vkutils.common.network.util.LongAndInt;
 import ru.markin.vkutils.presentation.base.BasePresenter;
 import ru.markin.vkutils.presentation.view.dialog.DialogView;
@@ -28,6 +26,7 @@ public class DialogPresenter extends BasePresenter<DialogView> {
 
     private final String token;
     private final int id;
+    private final int COUNT_OF_MESSAGES = 5000;
     @Inject
     @Named(DialogModule.ALL)
     @Getter
@@ -126,36 +125,24 @@ public class DialogPresenter extends BasePresenter<DialogView> {
         information.incomingCount = 0;
         information.outgoingCount = 0;
         int i = 0;
-        while (i < information.count && !stop) {
-            DialogInfo dialogInfo = apiExecutor.getDialogInfo(token, id, i);
-            if (dialogInfo != null) {
-                List<List<Integer>> dialogInfoList = dialogInfo.getOutputs();
-                for (List<Integer> list : dialogInfoList) {
-                    for (Integer item : list) {
-                        if (item == 0) {
-                            information.incomingCount++;
-                        } else {
-                            information.outgoingCount++;
-                        }
-                    }
-                }
+        while (i < information.count && !stop && i >= 0) {
+            IntAndInt count = apiExecutor.getIncomingAndOutgoingCount(token, id, i);
+            if (count != null) {
+                information.incomingCount += count.getFirstInt();
+                information.outgoingCount += count.getSecondInt();
             } else {
-                i -= 5000;
+                i -= COUNT_OF_MESSAGES;
             }
-            i += 5000;
+            i += COUNT_OF_MESSAGES;
         }
         return Observable.just(information);
     }
 
     private static class Information {
-
         int count;
         int incomingCount;
         int outgoingCount;
         long firstDate;
         long lastDate;
-
-        Information() {
-        }
     }
 }

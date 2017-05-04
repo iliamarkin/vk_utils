@@ -27,8 +27,8 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import ru.markin.vkutils.R;
-import ru.markin.vkutils.common.Util;
-import ru.markin.vkutils.common.Value;
+import ru.markin.vkutils.common.util.Util;
+import ru.markin.vkutils.common.util.Value;
 import ru.markin.vkutils.presentation.presenter.dialog.DialogPresenter;
 import ru.markin.vkutils.presentation.view.dialog.DialogView;
 import ru.markin.vkutils.ui.base.BaseActivity;

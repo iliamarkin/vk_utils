@@ -5,28 +5,28 @@ import lombok.Getter;
 import lombok.Setter;
 
 @EqualsAndHashCode(exclude = {"firstInt", "secondInt"})
-public final class LongAndInt {
+public final class IntAndInt {
 
     @Getter
     @Setter
-    private long longValue;
+    private int firstInt;
     @Getter
     @Setter
-    private int intValue;
+    private int secondInt;
 
-    public LongAndInt() {
+    public IntAndInt() {
     }
 
-    public LongAndInt(long longValue, int intValue) {
-        this.longValue = longValue;
-        this.intValue = intValue;
+    public IntAndInt(int firstInt, int secondInt) {
+        this.firstInt = firstInt;
+        this.secondInt = secondInt;
     }
 
     @Override
     public String toString() {
         return "LongAndInt{" +
-                "firstInt=" + longValue +
-                ", secondInt=" + intValue +
+                "firstInt=" + firstInt +
+                ", secondInt=" + secondInt +
                 '}';
     }
 }

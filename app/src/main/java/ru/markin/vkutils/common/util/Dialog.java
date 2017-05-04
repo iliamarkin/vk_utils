@@ -1,4 +1,4 @@
-package ru.markin.vkutils.common;
+package ru.markin.vkutils.common.util;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

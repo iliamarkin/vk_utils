@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import ru.markin.vkutils.R;
-import ru.markin.vkutils.common.Dialog;
+import ru.markin.vkutils.common.util.Dialog;
 import ru.markin.vkutils.presentation.presenter.statistics.StatisticsPresenter;
 import ru.markin.vkutils.presentation.view.statistics.StatisticsView;
 import ru.markin.vkutils.ui.base.BaseActivity;

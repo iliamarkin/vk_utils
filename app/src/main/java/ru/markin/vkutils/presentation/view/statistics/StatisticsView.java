@@ -4,7 +4,7 @@ import com.arellomobile.mvp.MvpView;
 
 import java.util.List;
 
-import ru.markin.vkutils.common.Dialog;
+import ru.markin.vkutils.common.util.Dialog;
 
 public interface StatisticsView extends MvpView {
 

@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
 import java.io.IOException;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -15,6 +16,7 @@ import ru.markin.vkutils.common.network.gson.DialogInfo;
 import ru.markin.vkutils.common.network.gson.DialogList;
 import ru.markin.vkutils.common.network.gson.History;
 import ru.markin.vkutils.common.network.gson.SearchList;
+import ru.markin.vkutils.common.network.util.IntAndInt;
 import ru.markin.vkutils.common.network.util.LongAndInt;
 
 public class ApiExecutor {
@@ -56,8 +58,7 @@ public class ApiExecutor {
                 .flatMap(dialogListResponse -> {
                     if (dialogListResponse.isSuccessful()) {
                         return Observable.just(dialogListResponse.body());
-                    }
-                    else {
+                    } else {
                         throw new RuntimeException();
                     }
                 });
@@ -75,7 +76,8 @@ public class ApiExecutor {
         try {
             Response<History> response = apiService.getHistory(1, id, 1, token, "5.63").execute();
             return response.isSuccessful() ? response.body().getResponse().getItems().get(0).getDate() * 1000 : -1;
-        } catch (IOException ignore) {}
+        } catch (IOException ignore) {
+        }
         return -1;
     }
 
@@ -83,7 +85,8 @@ public class ApiExecutor {
         try {
             Response<History> response = apiService.getHistory(1, id, 0, token, "5.63").execute();
             return response.isSuccessful() ? response.body().getResponse().getItems().get(0).getDate() * 1000 : -1;
-        } catch (IOException ignore) {}
+        } catch (IOException ignore) {
+        }
         return -1;
     }
 
@@ -95,7 +98,8 @@ public class ApiExecutor {
                 int count = response.body().getResponse().getCount();
                 return new LongAndInt(date, count);
             }
-        } catch (IOException ignore) {}
+        } catch (IOException ignore) {
+        }
         return new LongAndInt(-1, -1);
     }
 
@@ -107,7 +111,8 @@ public class ApiExecutor {
                 int count = response.body().getResponse().getCount();
                 return new LongAndInt(date, count);
             }
-        } catch (IOException ignore) {}
+        } catch (IOException ignore) {
+        }
         return new LongAndInt(-1, -1);
     }
 
@@ -117,9 +122,28 @@ public class ApiExecutor {
             if (response.isSuccessful()) {
                 return response.body();
             }
-        } catch (IOException ignore) {}
+        } catch (IOException ignore) {
+        }
         return null;
     }
 
-
+    public IntAndInt getIncomingAndOutgoingCount(String token, int id, int offset) {
+        int incomingCount = 0;
+        int outgoingCount = 0;
+        DialogInfo dialogInfo = getDialogInfo(token, id, offset);
+        if (dialogInfo != null) {
+            List<List<Integer>> dialogInfoList = dialogInfo.getOutputs();
+            for (List<Integer> list : dialogInfoList) {
+                for (Integer item : list) {
+                    if (item == 0) {
+                        incomingCount++;
+                    } else {
+                        outgoingCount++;
+                    }
+                }
+            }
+            return new IntAndInt(incomingCount, outgoingCount);
+        }
+        return null;
+    }
 }

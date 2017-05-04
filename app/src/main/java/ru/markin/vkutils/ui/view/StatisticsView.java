@@ -5,12 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ru.markin.vkutils.R;
-import ru.markin.vkutils.common.Util;
+import ru.markin.vkutils.common.util.Util;
 
 public class StatisticsView extends LinearLayout {
 
