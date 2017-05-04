@@ -4,8 +4,8 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 
 import dagger.Component;
-import ru.markin.vkutils.app.network.ApiExecutor;
-import ru.markin.vkutils.app.network.ApiService;
+import ru.markin.vkutils.common.network.ApiExecutor;
+import ru.markin.vkutils.common.network.ApiService;
 import ru.markin.vkutils.scope.PerApplication;
 
 @PerApplication

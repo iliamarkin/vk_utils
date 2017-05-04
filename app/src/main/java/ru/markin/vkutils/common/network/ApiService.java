@@ -1,16 +1,16 @@
-package ru.markin.vkutils.app.network;
+package ru.markin.vkutils.common.network;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import ru.markin.vkutils.app.network.gson.AccessToken;
-import ru.markin.vkutils.app.network.gson.CheckToken;
-import ru.markin.vkutils.app.network.gson.DialogInfo;
-import ru.markin.vkutils.app.network.gson.DialogList;
-import ru.markin.vkutils.app.network.gson.History;
-import ru.markin.vkutils.app.network.gson.SearchList;
+import ru.markin.vkutils.common.network.gson.AccessToken;
+import ru.markin.vkutils.common.network.gson.CheckToken;
+import ru.markin.vkutils.common.network.gson.DialogInfo;
+import ru.markin.vkutils.common.network.gson.DialogList;
+import ru.markin.vkutils.common.network.gson.History;
+import ru.markin.vkutils.common.network.gson.SearchList;
 
 public interface ApiService {
 

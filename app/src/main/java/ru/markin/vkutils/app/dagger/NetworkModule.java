@@ -9,8 +9,8 @@ import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.markin.vkutils.app.network.ApiExecutor;
-import ru.markin.vkutils.app.network.ApiService;
+import ru.markin.vkutils.common.network.ApiExecutor;
+import ru.markin.vkutils.common.network.ApiService;
 import ru.markin.vkutils.scope.PerApplication;
 
 @SuppressWarnings("WeakerAccess,FieldCanBeLocal")

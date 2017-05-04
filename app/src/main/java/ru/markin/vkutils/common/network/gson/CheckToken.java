@@ -1,13 +1,11 @@
-package ru.markin.vkutils.app.network.gson;
+package ru.markin.vkutils.common.network.gson;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 import lombok.Getter;
 
-public class History {
+public class CheckToken {
 
     @SerializedName("response")
     @Expose
@@ -15,28 +13,24 @@ public class History {
     private Response response;
 
     public static class Response {
-
-        @SerializedName("count")
+        @SerializedName("success")
         @Expose
         @Getter
-        private int count;
+        private int success;
 
-        @SerializedName("items")
+        @SerializedName("user_id")
         @Expose
         @Getter
-        private List<Item> items = null;
-    }
-
-    public static class Item {
+        private long userId;
 
         @SerializedName("date")
         @Expose
         @Getter
         private long date;
 
-        @SerializedName("out")
+        @SerializedName("expire")
         @Expose
         @Getter
-        private int out;
+        private long expire;
     }
 }

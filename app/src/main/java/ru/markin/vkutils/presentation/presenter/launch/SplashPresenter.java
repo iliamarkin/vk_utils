@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import ru.markin.vkutils.app.App;
-import ru.markin.vkutils.app.network.ApiExecutor;
+import ru.markin.vkutils.common.network.ApiExecutor;
 import ru.markin.vkutils.presentation.base.BasePresenter;
 import ru.markin.vkutils.presentation.view.launch.SplashView;
 import ru.markin.vkutils.ui.screen.launch.DaggerSplashComponent;

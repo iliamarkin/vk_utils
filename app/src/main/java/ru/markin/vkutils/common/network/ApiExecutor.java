@@ -1,4 +1,4 @@
-package ru.markin.vkutils.app.network;
+package ru.markin.vkutils.common.network;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,11 +11,11 @@ import java.io.IOException;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
-import ru.markin.vkutils.app.network.gson.DialogInfo;
-import ru.markin.vkutils.app.network.gson.DialogList;
-import ru.markin.vkutils.app.network.gson.History;
-import ru.markin.vkutils.app.network.gson.SearchList;
-import ru.markin.vkutils.app.network.util.LongAndInt;
+import ru.markin.vkutils.common.network.gson.DialogInfo;
+import ru.markin.vkutils.common.network.gson.DialogList;
+import ru.markin.vkutils.common.network.gson.History;
+import ru.markin.vkutils.common.network.gson.SearchList;
+import ru.markin.vkutils.common.network.util.LongAndInt;
 
 public class ApiExecutor {
 

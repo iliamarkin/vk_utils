@@ -1,4 +1,4 @@
-package ru.markin.vkutils.app.network.gson;
+package ru.markin.vkutils.common.network.gson;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
