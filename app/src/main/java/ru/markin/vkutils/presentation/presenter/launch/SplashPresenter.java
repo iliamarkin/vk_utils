@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import ru.markin.vkutils.app.App;
-import ru.markin.vkutils.common.network.ApiExecutor;
+import ru.markin.vkutils.common.network.ApiService;
 import ru.markin.vkutils.presentation.base.BasePresenter;
 import ru.markin.vkutils.presentation.view.launch.SplashView;
 import ru.markin.vkutils.ui.screen.launch.DaggerSplashComponent;
@@ -19,7 +19,7 @@ import ru.markin.vkutils.ui.screen.launch.SplashComponent;
 public class SplashPresenter extends BasePresenter<SplashView> {
 
     @Inject
-    ApiExecutor apiExecutor;
+    ApiService apiService;
 
     @Inject
     int appId;
@@ -36,7 +36,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
 
     @Override
     protected void createComponent() {
-        SplashComponent component = DaggerSplashComponent.builder()
+        final SplashComponent component = DaggerSplashComponent.builder()
                 .appComponent(getAppComponent())
                 .build();
         component.inject(this);
@@ -45,8 +45,8 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     private void showScreen() {
         checkTokenObservable()
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(aBoolean -> Observable.just(apiExecutor.isOnline() && aBoolean
-                        || !apiExecutor.isOnline() && aBoolean))
+                .flatMap(aBoolean -> Observable.just(this.apiService.isOnline() && aBoolean
+                        || !this.apiService.isOnline() && aBoolean))
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
                         getViewState().startScreenOnCorrectToken();
@@ -57,7 +57,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     }
 
     private Observable<Boolean> checkTokenObservable() {
-        String token = sharedPreferences.getString(App.TOKEN_KEY, "");
-        return apiExecutor.checkTokenObservable(token, secretKey, appId);
+        final String token = this.sharedPreferences.getString(App.TOKEN_KEY, "");
+        return this.apiService.checkTokenObservable(token, this.secretKey, this.appId);
     }
 }

@@ -9,7 +9,7 @@
         android:id="@+id/recycler_item_search_default_photo"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:background="@null"
         android:src="@drawable/ic_default_user" />
 
@@ -17,7 +17,7 @@
         android:id="@+id/recycler_item_search_photo"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:background="@null" />
 
     <TextView
@@ -25,10 +25,10 @@
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/recycler_item_search_photo"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/recycler_item_search_photo"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/color_text"
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 </RelativeLayout>

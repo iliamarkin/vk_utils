@@ -2,7 +2,6 @@ package ru.markin.vkutils.ui.screen.auth.dialog;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
@@ -23,7 +22,7 @@ public class AuthDialogFragment extends BaseDialogFragment implements AuthDialog
     public AuthDialogFragmentPresenter presenter;
 
     @Override
-    protected void initializeView(View rootView, Bundle savedInstanceState) {
+    protected void initializeView(final View rootView, final Bundle savedInstanceState) {
         disableTitleWindow();
         initWebView(rootView);
     }
@@ -51,21 +50,21 @@ public class AuthDialogFragment extends BaseDialogFragment implements AuthDialog
     }
 
     private void disableTitleWindow() {
-        Window window = getDialog().getWindow();
+        final Window window = getDialog().getWindow();
         if (window != null) {
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         }
     }
 
-    @SuppressWarnings("deprecation")
-    private void initWebView(View rootView) {
-        WebView authView = (WebView) rootView.findViewById(R.id.dialog_fragment_auth_web_view);
-        authView.loadUrl(presenter.url());
+    private void initWebView(final View rootView) {
+        final WebView authView = rootView.findViewById(R.id.dialog_fragment_auth_web_view);
+        authView.loadUrl(this.presenter.url());
+
 
         authView.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                presenter.getAccessToken(url);
+            public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
+                AuthDialogFragment.this.presenter.getAccessToken(url);
                 view.loadUrl(url);
                 return true;
             }

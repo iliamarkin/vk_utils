@@ -36,11 +36,12 @@ public class DialogsFragment extends BaseFragment implements DialogsFragmentView
     private ViewFlipper flipper;
     private SwipeRefreshLayout refreshLayout;
 
-    public DialogsFragment() {}
+    public DialogsFragment() {
+    }
 
     @Override
-    protected void initializeView(View rootView, Bundle savedInstanceState) {
-        flipper = (ViewFlipper) rootView.findViewById(R.id.fragment_dialogs_flipper_main);
+    protected void initializeView(final View rootView, final Bundle savedInstanceState) {
+        this.flipper = rootView.findViewById(R.id.fragment_dialogs_flipper_main);
         initializeRecyclerView(rootView);
         initSwipeRefreshLayout(rootView);
     }
@@ -57,64 +58,70 @@ public class DialogsFragment extends BaseFragment implements DialogsFragmentView
 
     @Override
     public void doOnBadToken() {
-        Activity activity = getActivity();
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
         activity.startActivity(new Intent(activity, AuthActivity.class));
         activity.finish();
     }
 
     @Override
-    public void doOnLoaded(List<Dialog> dialogs, int dialogsCount) {
-        adapter.setDialogsCount(dialogsCount);
-        adapter.addAll(dialogs);
-        flipper.setDisplayedChild(1);
+    public void doOnLoaded(final List<Dialog> dialogs, final int dialogsCount) {
+        this.adapter.setDialogsCount(dialogsCount);
+        this.adapter.addAll(dialogs);
+        this.flipper.setDisplayedChild(1);
     }
 
     @Override
-    public void doOnLoadMore(List<Dialog> dialogs, int dialogsCount) {
-        adapter.setDialogsCount(dialogsCount);
-        adapter.addAllToEnd(dialogs);
+    public void doOnLoadMore(final List<Dialog> dialogs, final int dialogsCount) {
+        this.adapter.setDialogsCount(dialogsCount);
+        this.adapter.addAllToEnd(dialogs);
     }
 
     @Override
-    public void doOnUpdate(List<Dialog> dialogs, int dialogsCount) {
-        adapter.setDialogsCount(dialogsCount);
-        adapter.updateAllItems(dialogs);
+    public void doOnUpdate(final List<Dialog> dialogs, final int dialogsCount) {
+        this.adapter.setDialogsCount(dialogsCount);
+        this.adapter.updateAllItems(dialogs);
     }
 
     @Override
     public void hideRefreshLayoutProgressBar() {
-        refreshLayout.setRefreshing(false);
+        this.refreshLayout.setRefreshing(false);
     }
 
     @Override
     public void doOnEmptyDialogs() {
-        flipper.setDisplayedChild(2);
+        this.flipper.setDisplayedChild(2);
     }
 
-    private void initializeRecyclerView(View rootView) {
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_dialogs_recycler_view_dialogs);
-        adapter = new DialogsAdapter(getContext(), presenter.getDialogs());
-        recyclerView.setAdapter(adapter);
+    @SuppressWarnings("ConstantConditions")
+    private void initializeRecyclerView(final View rootView) {
+        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        final RecyclerView recyclerView = rootView.findViewById(R.id.fragment_dialogs_recycler_view_dialogs);
+        this.adapter = new DialogsAdapter(getContext(), this.presenter.getDialogs());
+        recyclerView.setAdapter(this.adapter);
         recyclerView.setLayoutManager(manager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), manager.getOrientation()));
         initializeRecyclerViewScrollListener(recyclerView, manager);
     }
 
-    private void initializeRecyclerViewScrollListener(RecyclerView recyclerView, LinearLayoutManager manager) {
+    private void initializeRecyclerViewScrollListener(final RecyclerView recyclerView,
+                                                      final LinearLayoutManager manager) {
         RxRecyclerView.scrollEvents(recyclerView)
                 .observeOn(AndroidSchedulers.mainThread())
-                .filter(r -> r.dy() > 0 && (manager.getChildCount() + manager.findFirstVisibleItemPosition()) >= manager.getItemCount()
-                        && adapter.getDialogsCount() != adapter.getItemCount())
+                .filter(r -> r.dy() > 0)
+                .filter(r -> manager.getChildCount() + manager.findFirstVisibleItemPosition() >= manager.getItemCount())
+                .filter(r -> this.adapter.getDialogsCount() != this.adapter.getItemCount())
                 .debounce(200, TimeUnit.MILLISECONDS)
                 .observeOn(Schedulers.io())
-                .subscribe(recyclerViewScrollEvent -> presenter.loadMoreDialogs());
+                .subscribe(recyclerViewScrollEvent -> this.presenter.loadMoreDialogs());
     }
 
-    private void initSwipeRefreshLayout(View rootView) {
-        refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.fragment_dialogs_swipe_layout);
-        refreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        refreshLayout.setOnRefreshListener(() -> presenter.updateDialogs());
+    private void initSwipeRefreshLayout(final View rootView) {
+        this.refreshLayout = rootView.findViewById(R.id.fragment_dialogs_swipe_layout);
+        this.refreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        this.refreshLayout.setOnRefreshListener(() -> this.presenter.updateDialogs());
     }
 }

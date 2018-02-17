@@ -7,7 +7,6 @@ import java.util.List;
 
 import lombok.Getter;
 
-@SuppressWarnings("WeakerAccess")
 public class SearchList {
 
     @SerializedName("response")

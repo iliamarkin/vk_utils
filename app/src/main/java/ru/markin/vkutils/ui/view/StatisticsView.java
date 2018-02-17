@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java8.util.function.BiFunction;
 import ru.markin.vkutils.R;
 import ru.markin.vkutils.common.util.Util;
 
@@ -29,39 +30,44 @@ public class StatisticsView extends LinearLayout {
     private String incomingText;
     private String outgoingText;
 
-    public StatisticsView(Context context) {
+    public StatisticsView(final Context context) {
         super(context);
         initialize(context);
     }
 
-    public StatisticsView(Context context, AttributeSet attrs) {
+    public StatisticsView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        View rootView = initialize(context);
+        final View rootView = initialize(context);
         initializeAttributes(rootView, attrs, context);
     }
 
-    private View initialize(Context context) {
-        View rootView = inflate(context, R.layout.statistics, this);
+    private View initialize(final Context context) {
+        final View rootView = inflate(context, R.layout.statistics, this);
+
         initializeView(rootView);
         getStrings(context);
         return rootView;
     }
 
-    private void initializeAttributes(View rootView, AttributeSet attrs, Context context) {
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.StatisticsView, 0, 0);
-        int mainTextColor = typedArray.getColor(R.styleable.StatisticsView_mainTextColor, Color.BLACK);
-        int secondaryTextColor = typedArray.getColor(R.styleable.StatisticsView_secondaryTextColor, Color.GRAY);
+    private void initializeAttributes(final View rootView,
+                                      final AttributeSet attrs,
+                                      final Context context) {
+        final TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.StatisticsView, 0, 0);
+        final int mainTextColor = typedArray.getColor(R.styleable.StatisticsView_mainTextColor, Color.BLACK);
+        final int secondaryTextColor = typedArray.getColor(R.styleable.StatisticsView_secondaryTextColor, Color.GRAY);
+
         typedArray.recycle();
         setMainTextColor(rootView, mainTextColor);
         setSecondaryTextColor(secondaryTextColor);
     }
 
-    private void setMainTextColor(View rootView, int color) {
-        TextView duration = (TextView) rootView.findViewById(R.id.statistics_duration);
-        TextView lastActivity = (TextView) rootView.findViewById(R.id.statistics_last_activity);
-        TextView countPerWeek = (TextView) rootView.findViewById(R.id.statistics_count_per_week);
-        TextView countPerDay = (TextView) rootView.findViewById(R.id.statistics_count_per_day);
-        TextView countPerHour = (TextView) rootView.findViewById(R.id.statistics_count_per_hour);
+    private void setMainTextColor(final View rootView, final int color) {
+        final TextView duration = rootView.findViewById(R.id.statistics_duration);
+        final TextView lastActivity = rootView.findViewById(R.id.statistics_last_activity);
+        final TextView countPerWeek = rootView.findViewById(R.id.statistics_count_per_week);
+        final TextView countPerDay = rootView.findViewById(R.id.statistics_count_per_day);
+        final TextView countPerHour = rootView.findViewById(R.id.statistics_count_per_hour);
+
         duration.setTextColor(color);
         lastActivity.setTextColor(color);
         countPerWeek.setTextColor(color);
@@ -70,82 +76,119 @@ public class StatisticsView extends LinearLayout {
 
     }
 
-    private void setSecondaryTextColor(int color) {
-        duration.setTextColor(color);
-        lastActivityDuration.setTextColor(color);
-        allMessagesPerWeek.setTextColor(color);
-        incomingMessagesPerWeek.setTextColor(color);
-        outgoingMessagesPerWeek.setTextColor(color);
-        allMessagesPerDay.setTextColor(color);
-        incomingMessagesPerDay.setTextColor(color);
-        outgoingMessagesPerDay.setTextColor(color);
-        allMessagesPerHour.setTextColor(color);
-        incomingMessagesPerHour.setTextColor(color);
-        outgoingMessagesPerHour.setTextColor(color);
+    private void setSecondaryTextColor(final int color) {
+        this.duration.setTextColor(color);
+        this.lastActivityDuration.setTextColor(color);
+        this.allMessagesPerWeek.setTextColor(color);
+        this.incomingMessagesPerWeek.setTextColor(color);
+        this.outgoingMessagesPerWeek.setTextColor(color);
+        this.allMessagesPerDay.setTextColor(color);
+        this.incomingMessagesPerDay.setTextColor(color);
+        this.outgoingMessagesPerDay.setTextColor(color);
+        this.allMessagesPerHour.setTextColor(color);
+        this.incomingMessagesPerHour.setTextColor(color);
+        this.outgoingMessagesPerHour.setTextColor(color);
     }
 
     private void getStrings(Context context) {
-        allText = context.getString(R.string.statistics_all_messages) + ": ";
-        incomingText = context.getString(R.string.statistics_input_messages) + ": ";
-        outgoingText = context.getString(R.string.statistics_output_messages) + ": ";
+        this.allText = context.getString(R.string.statistics_all_messages) + ": ";
+        this.incomingText = context.getString(R.string.statistics_input_messages) + ": ";
+        this.outgoingText = context.getString(R.string.statistics_output_messages) + ": ";
     }
 
-    private void initializeView(View rootView) {
-        duration = (TextView) rootView.findViewById(R.id.statistics_text_view_duration);
-        lastActivityDuration = (TextView) rootView.findViewById(R.id.statistics_text_view_last_activity);
-        allMessagesPerWeek = (TextView) rootView.findViewById(R.id.statistics_text_view_all_messages_week);
-        incomingMessagesPerWeek = (TextView) rootView.findViewById(R.id.statistics_text_view_input_messages_week);
-        outgoingMessagesPerWeek = (TextView) rootView.findViewById(R.id.statistics_text_view_output_messages_week);
-        allMessagesPerDay = (TextView) rootView.findViewById(R.id.statistics_text_view_all_messages_day);
-        incomingMessagesPerDay = (TextView) rootView.findViewById(R.id.statistics_text_view_input_messages_day);
-        outgoingMessagesPerDay = (TextView) rootView.findViewById(R.id.statistics_text_view_output_messages_day);
-        allMessagesPerHour = (TextView) rootView.findViewById(R.id.statistics_text_view_all_messages_hour);
-        incomingMessagesPerHour = (TextView) rootView.findViewById(R.id.statistics_text_view_input_messages_hour);
-        outgoingMessagesPerHour = (TextView) rootView.findViewById(R.id.statistics_text_view_output_messages_hour);
+    private void initializeView(final View rootView) {
+        this.duration = rootView.findViewById(R.id.statistics_text_view_duration);
+        this.lastActivityDuration = rootView.findViewById(R.id.statistics_text_view_last_activity);
+        this.allMessagesPerWeek = rootView.findViewById(R.id.statistics_text_view_all_messages_week);
+        this.incomingMessagesPerWeek = rootView.findViewById(R.id.statistics_text_view_input_messages_week);
+        this.outgoingMessagesPerWeek = rootView.findViewById(R.id.statistics_text_view_output_messages_week);
+        this.allMessagesPerDay = rootView.findViewById(R.id.statistics_text_view_all_messages_day);
+        this.incomingMessagesPerDay = rootView.findViewById(R.id.statistics_text_view_input_messages_day);
+        this.outgoingMessagesPerDay = rootView.findViewById(R.id.statistics_text_view_output_messages_day);
+        this.allMessagesPerHour = rootView.findViewById(R.id.statistics_text_view_all_messages_hour);
+        this.incomingMessagesPerHour = rootView.findViewById(R.id.statistics_text_view_input_messages_hour);
+        this.outgoingMessagesPerHour = rootView.findViewById(R.id.statistics_text_view_output_messages_hour);
     }
 
-    public void setMessagesCount(int all, int incoming, int outgoing, long firstDate, long lastDate) {
+    public void setMessagesCount(final int all,
+                                 final int incoming,
+                                 final int outgoing,
+                                 final long firstDate,
+                                 final long lastDate) {
         long difference = (lastDate - firstDate) / 1000;
         difference = (difference < 3600) ? 1 : difference / 3600;
         setMessagesPerHour(Math.round(all / difference), Math.round(incoming / difference), Math.round(outgoing / difference));
+
         difference = (difference < 24) ? 1 : difference / 24;
         setMessagesPerDay(Math.round(all / difference), Math.round(incoming / difference), Math.round(outgoing / difference));
+
         difference = (difference < 7) ? 1 : difference / 7;
         setMessagesPerWeek(Math.round(all / difference), Math.round(incoming / difference), Math.round(outgoing / difference));
     }
 
-    private void setMessagesPerWeek(int all, int incoming, int outgoing) {
-        String allData = allText + all;
-        String inputData = incomingText + incoming;
-        String outputData = outgoingText + outgoing;
-        allMessagesPerWeek.setText(allData);
-        incomingMessagesPerWeek.setText(inputData);
-        outgoingMessagesPerWeek.setText(outputData);
+    private void setMessagesPerWeek(final int all, final int incoming, final int outgoing) {
+        final String allData = allText + all;
+        final String inputData = incomingText + incoming;
+        final String outputData = outgoingText + outgoing;
+
+        this.allMessagesPerWeek.setText(allData);
+        this.incomingMessagesPerWeek.setText(inputData);
+        this.outgoingMessagesPerWeek.setText(outputData);
     }
 
-    private void setMessagesPerDay(int all, int incoming, int outgoing) {
-        String allData = allText + all;
-        String inputData = incomingText + incoming;
-        String outputData = outgoingText + outgoing;
-        allMessagesPerDay.setText(allData);
-        incomingMessagesPerDay.setText(inputData);
-        outgoingMessagesPerDay.setText(outputData);
+    private void setMessagesPerDay(final int all, final int incoming, final int outgoing) {
+        final String allData = this.allText + all;
+        final String inputData = this.incomingText + incoming;
+        final String outputData = this.outgoingText + outgoing;
+
+        this.allMessagesPerDay.setText(allData);
+        this.incomingMessagesPerDay.setText(inputData);
+        this.outgoingMessagesPerDay.setText(outputData);
     }
 
-    private void setMessagesPerHour(int all, int incoming, int outgoing) {
-        String allData = allText + all;
-        String inputData = incomingText + incoming;
-        String outputData = outgoingText + outgoing;
-        allMessagesPerHour.setText(allData);
-        incomingMessagesPerHour.setText(inputData);
-        outgoingMessagesPerHour.setText(outputData);
+    private void setMessagesPerHour(final int all, final int incoming, final int outgoing) {
+        final String allData = this.allText + all;
+        final String inputData = this.incomingText + incoming;
+        final String outputData = this.outgoingText + outgoing;
+
+        this.allMessagesPerHour.setText(allData);
+        this.incomingMessagesPerHour.setText(inputData);
+        this.outgoingMessagesPerHour.setText(outputData);
     }
 
-    public void setDuration(long firstDate, long lastDate) {
-        duration.setText(Util.getPeriod(getResources(), firstDate, lastDate));
+    public void setDuration(final long firstDate, final long lastDate) {
+        this.duration.setText(Util.getPeriod(createTextProducer(), firstDate, lastDate));
     }
 
-    public void setLastActivityDuration(long lastDate) {
-        lastActivityDuration.setText(Util.getPeriod(getResources(), lastDate, System.currentTimeMillis()));
+    public void setLastActivityDuration(final long lastDate) {
+        this.lastActivityDuration.setText(Util.getPeriod(createTextProducer(), lastDate,
+                System.currentTimeMillis()));
+    }
+
+    private BiFunction<Util.TimePeriod, Integer, String> createTextProducer() {
+        return (timePeriod, count) -> {
+            if (count == 0) {
+                return "";
+            }
+            switch (timePeriod) {
+                case YEAR:
+                    return getResources()
+                            .getQuantityString(R.plurals.years, count, count) + " ";
+                case MONTH:
+                    return getResources()
+                            .getQuantityString(R.plurals.months, count, count) + " ";
+                case DAY:
+                    return getResources()
+                            .getQuantityString(R.plurals.days, count, count) + " ";
+                case HOUR:
+                    return getResources()
+                            .getQuantityString(R.plurals.hours, count, count) + " ";
+                case MINUTE:
+                    return getResources()
+                            .getQuantityString(R.plurals.minutes, count, count);
+                default:
+                    throw new IllegalArgumentException("Unknown enum: " + timePeriod.name());
+            }
+        };
     }
 }

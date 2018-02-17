@@ -5,13 +5,14 @@
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:focusable="true">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/recycler_item_dialogs_default_photo"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:background="@null"
         android:src="@drawable/ic_default_user" />
 
@@ -19,15 +20,15 @@
         android:id="@+id/recycler_item_dialogs_photo"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:background="@null" />
 
     <TextView
         android:id="@+id/recycler_item_dialogs_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/recycler_item_dialogs_photo"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/recycler_item_dialogs_photo"
         android:singleLine="true"
         android:textColor="@color/color_text"
         android:textSize="18sp"
@@ -38,8 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/recycler_item_dialogs_title"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/recycler_item_dialogs_photo"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/recycler_item_dialogs_photo"
         android:textColor="@color/color_secondaryText"
-        android:textSize="10sp" />
+        android:textSize="12sp" />
 </RelativeLayout>

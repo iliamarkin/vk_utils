@@ -23,12 +23,12 @@ public class SplashActivity extends BaseActivity implements SplashView {
     }
 
     @Override
-    protected void initializeToolbar(Bundle savedInstanceState) {
+    protected void initializeToolbar(final Bundle savedInstanceState) {
         //empty method
     }
 
     @Override
-    protected void initializeView(Bundle savedInstanceState) {
+    protected void initializeView(final Bundle savedInstanceState) {
         //empty method
     }
 

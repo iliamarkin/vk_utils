@@ -1,5 +1,6 @@
 package ru.markin.vkutils.ui.screen.dialog;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -28,7 +29,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ru.markin.vkutils.R;
 import ru.markin.vkutils.common.util.Util;
-import ru.markin.vkutils.common.util.Value;
+import ru.markin.vkutils.ui.util.Value;
 import ru.markin.vkutils.presentation.presenter.dialog.DialogPresenter;
 import ru.markin.vkutils.presentation.view.dialog.DialogView;
 import ru.markin.vkutils.ui.base.BaseActivity;
@@ -38,6 +39,7 @@ public class DialogActivity extends BaseActivity implements DialogView {
 
     @InjectPresenter
     public DialogPresenter presenter;
+
     private PieChart pieChart;
     private PieDataSet dataSet;
     private TextView allMessagesCountTextView;
@@ -61,32 +63,32 @@ public class DialogActivity extends BaseActivity implements DialogView {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    protected void initializeToolbar(Bundle savedInstanceState) {
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar_dialog));
+    protected void initializeToolbar(final Bundle savedInstanceState) {
+        setSupportActionBar(findViewById(R.id.toolbar_dialog));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initializeTitle();
         initializePhoto();
     }
 
     @Override
-    protected void initializeView(Bundle savedInstanceState) {
-        pieChart = (PieChart) findViewById(R.id.activity_dialog_pie_chart);
-        allMessagesCountTextView = (TextView) findViewById(R.id.activity_dialog_text_view_all_messages);
-        incomingMessagesCountTextView = (TextView) findViewById(R.id.activity_dialog_text_view_input_messages);
-        outgoingMessagesCountTextView = (TextView) findViewById(R.id.activity_dialog_text_view_output_messages);
-        firstDateTextView = (TextView) findViewById(R.id.activity_dialog_text_view_first_message);
-        lastDateTextView = (TextView) findViewById(R.id.activity_dialog_text_view_last_message);
-        flipper = (ViewFlipper) findViewById(R.id.activity_dialog_flipper_main);
-        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_dialog_swipe_layout);
-        statisticsView = (StatisticsView) findViewById(R.id.activity_dialog_statistics_view);
+    protected void initializeView(final Bundle savedInstanceState) {
+        this.pieChart = findViewById(R.id.activity_dialog_pie_chart);
+        this.allMessagesCountTextView = findViewById(R.id.activity_dialog_text_view_all_messages);
+        this.incomingMessagesCountTextView = findViewById(R.id.activity_dialog_text_view_input_messages);
+        this.outgoingMessagesCountTextView = findViewById(R.id.activity_dialog_text_view_output_messages);
+        this.firstDateTextView = findViewById(R.id.activity_dialog_text_view_first_message);
+        this.lastDateTextView = findViewById(R.id.activity_dialog_text_view_last_message);
+        this.flipper = findViewById(R.id.activity_dialog_flipper_main);
+        this.refreshLayout = findViewById(R.id.activity_dialog_swipe_layout);
+        this.statisticsView = findViewById(R.id.activity_dialog_statistics_view);
         initializePieChart();
         initializeRefreshLayout();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            presenter.activityClosed();
+            this.presenter.activityClosed();
             finish();
         }
         return true;
@@ -94,12 +96,16 @@ public class DialogActivity extends BaseActivity implements DialogView {
 
     @Override
     public void onBackPressed() {
-        presenter.activityClosed();
+        this.presenter.activityClosed();
         super.onBackPressed();
     }
 
     @Override
-    public void setInformation(int count, int incomingCount, int outgoingCount, long firstDate, long lastDate) {
+    public void setInformation(final int count,
+                               final int incomingCount,
+                               final int outgoingCount,
+                               final long firstDate,
+                               final long lastDate) {
         setPieChartData(incomingCount, outgoingCount);
         setCounts(count, incomingCount, outgoingCount);
         setFirstAndLastDate(firstDate, lastDate);
@@ -108,57 +114,63 @@ public class DialogActivity extends BaseActivity implements DialogView {
 
     @Override
     public void doOnReady() {
-        flipper.setDisplayedChild(1);
+        this.flipper.setDisplayedChild(1);
     }
 
     @Override
     public void doOnEmpty() {
-        flipper.setDisplayedChild(2);
+        this.flipper.setDisplayedChild(2);
     }
 
     @Override
     public void hideRefreshLayoutProgressBar() {
-        refreshLayout.setRefreshing(false);
+        this.refreshLayout.setRefreshing(false);
     }
 
     private void initializeRefreshLayout() {
-        refreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        refreshLayout.setOnRefreshListener(() -> presenter.updateData());
+        this.refreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        this.refreshLayout.setOnRefreshListener(() -> this.presenter.updateData());
     }
 
     private void initializeTitle() {
-        TextView title = (TextView) findViewById(R.id.toolbar_dialog_title);
+        final TextView title = findViewById(R.id.toolbar_dialog_title);
         title.setText(getIntent().getStringExtra(Value.INTENT_TITLE));
         title.setSelected(true);
     }
 
-    @SuppressWarnings("deprecation")
     private void initializePhoto() {
-        CircleImageView photo = (CircleImageView) findViewById(R.id.toolbar_dialog_photo);
-        CircleImageView defaultPhoto = (CircleImageView) findViewById(R.id.toolbar_dialog_default_photo);
-        Drawable icon = getResources().getDrawable(R.drawable.ic_default_user);
-        String photoUrl = getIntent().getStringExtra(Value.INTENT_PHOTO);
+        final CircleImageView photo = findViewById(R.id.toolbar_dialog_photo);
+        final CircleImageView defaultPhoto = findViewById(R.id.toolbar_dialog_default_photo);
+        final Drawable icon = getResources().getDrawable(R.drawable.ic_default_user);
+        final String photoUrl = getIntent().getStringExtra(Value.INTENT_PHOTO);
+        final int id = getIntent().getIntExtra(Value.INTENT_ID, 0);
+
         Util.loadPhoto(this, photoUrl, photo, defaultPhoto, icon);
-        int id = getIntent().getIntExtra(Value.INTENT_ID, 0);
-        photo.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/im?sel=" + id))));
+        photo.setOnClickListener(view ->
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/im?sel=" + id))));
     }
 
     private void initializePieChart() {
-        List<PieEntry> entries = new ArrayList<>();
-        dataSet = new PieDataSet(entries, "");
-        dataSet.setValueFormatter(new PercentFormatter());
-        dataSet.setColors(ContextCompat.getColor(this, R.color.color_lightText), ContextCompat.getColor(this, R.color.colorPrimary));
-        dataSet.setValueTextColor(Color.WHITE);
-        PieData pieData = new PieData(dataSet);
+        final List<PieEntry> entries = new ArrayList<>();
+        this.dataSet = new PieDataSet(entries, "");
+        this.dataSet.setValueFormatter(new PercentFormatter());
+        this.dataSet.setColors(ContextCompat.getColor(this, R.color.color_lightText),
+                ContextCompat.getColor(this, R.color.colorPrimary));
+        this.dataSet.setValueTextColor(Color.WHITE);
+
+        final PieData pieData = new PieData(this.dataSet);
         pieData.setValueTextSize(10f);
-        pieChart.setData(pieData);
-        pieChart.setUsePercentValues(true);
-        Description description = new Description();
+
+        this.pieChart.setData(pieData);
+        this.pieChart.setUsePercentValues(true);
+        final Description description = new Description();
         description.setText("");
-        pieChart.setCenterTextSize(10);
-        pieChart.setDrawEntryLabels(false);
-        pieChart.setDescription(description);
-        Legend legend = pieChart.getLegend();
+
+        this.pieChart.setCenterTextSize(10);
+        this.pieChart.setDrawEntryLabels(false);
+        this.pieChart.setDescription(description);
+
+        final Legend legend = this.pieChart.getLegend();
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
@@ -167,30 +179,40 @@ public class DialogActivity extends BaseActivity implements DialogView {
         legend.setYEntrySpace(5);
     }
 
-    private void setPieChartData(int incomingCount, int outgoingCount) {
-        List<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(incomingCount, presenter.getIncomingText()));
-        entries.add(new PieEntry(outgoingCount, presenter.getOutgoingText()));
-        dataSet.setValues(entries);
-        dataSet.notifyDataSetChanged();
-        pieChart.notifyDataSetChanged();
-        pieChart.invalidate();
+    private void setPieChartData(final int incomingCount,
+                                 final int outgoingCount) {
+        final List<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(incomingCount, this.presenter.getIncomingText()));
+        entries.add(new PieEntry(outgoingCount, this.presenter.getOutgoingText()));
+        this.dataSet.setValues(entries);
+        this.dataSet.notifyDataSetChanged();
+        this.pieChart.notifyDataSetChanged();
+        this.pieChart.invalidate();
     }
 
-    private void setCounts(int allCount, int incomingCount, int outgoingCount) {
-        allMessagesCountTextView.setText(presenter.getAllText() + ": " + allCount);
-        incomingMessagesCountTextView.setText(presenter.getIncomingText() + ": " + incomingCount);
-        outgoingMessagesCountTextView.setText(presenter.getOutgoingText() + ": " + outgoingCount);
+    @SuppressLint("SetTextI18n")
+    private void setCounts(final int allCount,
+                           final int incomingCount,
+                           final int outgoingCount) {
+        this.allMessagesCountTextView.setText(this.presenter.getAllText() + ": " + allCount);
+        this.incomingMessagesCountTextView.setText(this.presenter.getIncomingText() + ": " + incomingCount);
+        this.outgoingMessagesCountTextView.setText(this.presenter.getOutgoingText() + ": " + outgoingCount);
     }
 
-    private void setFirstAndLastDate(long firstDate, long lastDate) {
-        firstDateTextView.setText(presenter.getFirstDateText() + ": " + Util.getFullDateText(firstDate));
-        lastDateTextView.setText(presenter.getLastDateText() + ": " + Util.getFullDateText(lastDate));
+    @SuppressLint("SetTextI18n")
+    private void setFirstAndLastDate(final long firstDate,
+                                     final long lastDate) {
+        this.firstDateTextView.setText(this.presenter.getFirstDateText() + ": " + Util.getFullDateText(firstDate));
+        this.lastDateTextView.setText(this.presenter.getLastDateText() + ": " + Util.getFullDateText(lastDate));
     }
 
-    private void setStatistics(int count, int incomingCount, int outgoingCount, long firstDate, long lastDate) {
-        statisticsView.setMessagesCount(count, incomingCount, outgoingCount, firstDate, lastDate);
-        statisticsView.setDuration(firstDate, lastDate);
-        statisticsView.setLastActivityDuration(lastDate);
+    private void setStatistics(final int count,
+                               final int incomingCount,
+                               final int outgoingCount,
+                               final long firstDate,
+                               final long lastDate) {
+        this.statisticsView.setMessagesCount(count, incomingCount, outgoingCount, firstDate, lastDate);
+        this.statisticsView.setDuration(firstDate, lastDate);
+        this.statisticsView.setLastActivityDuration(lastDate);
     }
 }

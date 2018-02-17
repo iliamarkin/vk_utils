@@ -21,44 +21,47 @@ public class AuthDialogFragmentPresenter extends BasePresenter<AuthDialogFragmen
             ",wall,groups,messages,email,notifications,stats,ads,offline" +
             ",docs,pages,stats,notifications&response_type=token";
 
-    @Inject int appId;
+    @Inject
+    int appId;
 
-    @Inject SharedPreferences sharedPreferences;
+    @Inject
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void createComponent() {
-        AuthDialogFragmentComponent component = DaggerAuthDialogFragmentComponent.builder()
+        final AuthDialogFragmentComponent component = DaggerAuthDialogFragmentComponent.builder()
                 .appComponent(App.getComponent())
                 .build();
         component.inject(this);
     }
 
     public String url() {
-        return FIRST_PART_URL + appId + SECOND_PART_URL;
+        return this.FIRST_PART_URL + this.appId + this.SECOND_PART_URL;
     }
 
-    public void getAccessToken(String url) {
+    public void getAccessToken(final String url) {
         if (url.contains("error")) {
             getViewState().doOnError();
-        } else if (url.contains("access_token=")){
-            String token = findTokenInUrl(url);
+        } else if (url.contains("access_token=")) {
+            final String token = findTokenInUrl(url);
             saveTokenToSharedPreference(token);
             getViewState().doOnSuccess();
         }
     }
 
-    private String findTokenInUrl(String url) {
-        int i = url.indexOf("access_token=") + 13;
-        StringBuilder stringBuilder = new StringBuilder();
-        while (Character.isDigit(url.charAt(i)) || Character.isLetter(url.charAt(i))) {
+    private String findTokenInUrl(final String url) {
+        final String accessToken = "access_token=";
+        int i = url.indexOf(accessToken) + accessToken.length();
+        final StringBuilder stringBuilder = new StringBuilder();
+        while (url.charAt(i) != '&') {
             stringBuilder.append(url.charAt(i));
             i++;
         }
         return stringBuilder.toString();
     }
 
-    private void saveTokenToSharedPreference(String token) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+    private void saveTokenToSharedPreference(final String token) {
+        final SharedPreferences.Editor editor = this.sharedPreferences.edit();
         editor.putString(App.TOKEN_KEY, token);
         editor.apply();
     }

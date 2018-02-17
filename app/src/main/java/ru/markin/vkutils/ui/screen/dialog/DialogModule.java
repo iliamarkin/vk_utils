@@ -21,35 +21,35 @@ public class DialogModule {
     @PerScreen
     @Provides
     @Named(ALL)
-    String provideAllText(Resources resources) {
+    String provideAllText(final Resources resources) {
         return resources.getString(R.string.statistics_all_messages);
     }
 
     @PerScreen
     @Provides
     @Named(INCOMING)
-    String provideIncomingText(Resources resources) {
+    String provideIncomingText(final Resources resources) {
         return resources.getString(R.string.statistics_input_messages);
     }
 
     @PerScreen
     @Provides
     @Named(OUTGOING)
-    String provideOutgoingText(Resources resources) {
+    String provideOutgoingText(final Resources resources) {
         return resources.getString(R.string.statistics_output_messages);
     }
 
     @PerScreen
     @Provides
     @Named(FIRST_DATE)
-    String provideFirstDateText(Resources resources) {
+    String provideFirstDateText(final Resources resources) {
         return resources.getString(R.string.first_message);
     }
 
     @PerScreen
     @Provides
     @Named(LAST_DATE)
-    String provideLastDateText(Resources resources) {
+    String provideLastDateText(final Resources resources) {
         return resources.getString(R.string.last_message);
     }
 }

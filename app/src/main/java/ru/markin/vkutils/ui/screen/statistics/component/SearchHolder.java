@@ -13,10 +13,10 @@ class SearchHolder extends RecyclerView.ViewHolder {
     CircleImageView photo;
     TextView title;
 
-    SearchHolder(View itemView) {
+    SearchHolder(final View itemView) {
         super(itemView);
-        defaultPhoto = (CircleImageView) itemView.findViewById(R.id.recycler_item_search_default_photo);
-        photo = (CircleImageView) itemView.findViewById(R.id.recycler_item_search_photo);
-        title = (TextView) itemView.findViewById(R.id.recycler_item_search_title);
+        this.defaultPhoto = itemView.findViewById(R.id.recycler_item_search_default_photo);
+        this.photo = itemView.findViewById(R.id.recycler_item_search_photo);
+        this.title = itemView.findViewById(R.id.recycler_item_search_title);
     }
 }

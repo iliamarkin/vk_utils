@@ -15,7 +15,7 @@ import lombok.Setter;
 import ru.markin.vkutils.R;
 import ru.markin.vkutils.common.util.Dialog;
 import ru.markin.vkutils.common.util.Util;
-import ru.markin.vkutils.common.util.Value;
+import ru.markin.vkutils.ui.util.Value;
 import ru.markin.vkutils.ui.screen.dialog.DialogActivity;
 
 public class DialogsAdapter extends RecyclerView.Adapter {

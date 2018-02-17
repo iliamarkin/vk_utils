@@ -12,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import lombok.Getter;
 import ru.markin.vkutils.app.App;
-import ru.markin.vkutils.common.network.ApiExecutor;
+import ru.markin.vkutils.common.network.ApiService;
 import ru.markin.vkutils.common.network.gson.SearchList;
 import ru.markin.vkutils.common.util.Dialog;
 import ru.markin.vkutils.presentation.base.BasePresenter;
@@ -34,7 +34,7 @@ public class StatisticsPresenter extends BasePresenter<StatisticsView> {
     @Getter
     String statistics;
     @Inject
-    ApiExecutor apiExecutor;
+    ApiService apiService;
     @Inject
     SharedPreferences sharedPreferences;
 
@@ -54,8 +54,8 @@ public class StatisticsPresenter extends BasePresenter<StatisticsView> {
         Observable.just(query)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(this::selectScreen)
-                .filter(q -> q.length() > 0 && apiExecutor.isOnline())
-                .flatMap(q -> apiExecutor.getSearchObservable(token, q.toString()))
+                .filter(q -> q.length() > 0 && apiService.isOnline())
+                .flatMap(q -> apiService.getSearchObservable(token, q.toString()))
                 .observeOn(Schedulers.io())
                 .map(this::createDialog)
                 .toList()

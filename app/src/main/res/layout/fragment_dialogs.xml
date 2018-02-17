@@ -24,7 +24,7 @@
                 android:id="@+id/fragment_dialogs_recycler_view_dialogs"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="vertical"/>
+                android:scrollbars="vertical" />
 
             <TextView
                 android:layout_width="wrap_content"

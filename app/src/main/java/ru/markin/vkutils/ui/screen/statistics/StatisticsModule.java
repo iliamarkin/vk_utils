@@ -18,14 +18,14 @@ public class StatisticsModule {
     @PerScreen
     @Provides
     @Named(MESSAGES)
-    String provideMessage(Resources resources) {
+    String provideMessage(final Resources resources) {
         return resources.getString(R.string.activity_stats_tab_layout_messages);
     }
 
     @PerScreen
     @Provides
     @Named(STATISTICS)
-    String provideStatistics(Resources resources) {
+    String provideStatistics(final Resources resources) {
         return resources.getString(R.string.activity_stats_tab_layout_statistics);
     }
 }

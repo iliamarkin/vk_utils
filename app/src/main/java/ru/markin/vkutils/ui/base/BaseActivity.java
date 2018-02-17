@@ -11,7 +11,7 @@ import ru.markin.vkutils.app.dagger.AppComponent;
 public abstract class BaseActivity extends MvpAppCompatActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeContentView();
         initializeToolbar(savedInstanceState);

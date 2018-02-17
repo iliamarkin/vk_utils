@@ -4,7 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@EqualsAndHashCode(exclude = "id")
+@EqualsAndHashCode(of = "id")
 public class Dialog implements Comparable<Dialog> {
 
     @Getter private final int id;

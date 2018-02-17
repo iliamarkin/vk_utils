@@ -13,33 +13,33 @@ import ru.markin.vkutils.scope.PerApplication;
 @Module
 public class AppModule {
 
-    private Context context;
+    private final Context context;
 
-    public AppModule(Context context) {
+    public AppModule(final Context context) {
         this.context = context;
     }
 
     @PerApplication
     @Provides
     int provideApplicationId() {
-        return context.getResources().getInteger(R.integer.application_id);
+        return this.context.getResources().getInteger(R.integer.application_id);
     }
 
     @PerApplication
     @Provides
     String provideSecretKey() {
-        return context.getString(R.string.secret_key);
+        return this.context.getString(R.string.secret_key);
     }
 
     @PerApplication
     @Provides
     SharedPreferences provideSharedPreference() {
-        return context.getSharedPreferences(App.APP_PREFERENCE, Context.MODE_PRIVATE);
+        return this.context.getSharedPreferences(App.APP_PREFERENCE, Context.MODE_PRIVATE);
     }
 
     @PerApplication
     @Provides
     Resources provideResources() {
-        return context.getResources();
+        return this.context.getResources();
     }
 }

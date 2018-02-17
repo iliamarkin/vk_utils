@@ -1,4 +1,4 @@
-package ru.markin.vkutils.common.util;
+package ru.markin.vkutils.ui.util;
 
 public class Value {
 

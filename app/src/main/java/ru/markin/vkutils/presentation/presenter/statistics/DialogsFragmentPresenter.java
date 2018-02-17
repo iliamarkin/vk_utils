@@ -6,6 +6,7 @@ import com.arellomobile.mvp.InjectViewState;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,7 +16,7 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import lombok.Getter;
 import ru.markin.vkutils.app.App;
-import ru.markin.vkutils.common.network.ApiExecutor;
+import ru.markin.vkutils.common.network.ApiService;
 import ru.markin.vkutils.common.network.gson.DialogList;
 import ru.markin.vkutils.common.util.Dialog;
 import ru.markin.vkutils.common.util.Util;
@@ -31,60 +32,63 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
     @Inject
     @Named(DialogsFragmentModule.TODAY)
     String todayText;
+
     @Inject
     @Named(DialogsFragmentModule.YESTERDAY)
     String yesterdayText;
+
     @Inject
     int appId;
+
     @Inject
     String secretKey;
+
     @Inject
     SharedPreferences sharedPreferences;
-    @Inject
-    ApiExecutor apiExecutor;
 
-    @Getter
-    private volatile boolean loading = true;
-    private boolean isLoaded = false;
+    @Inject
+    ApiService apiService;
+
     private final String token;
     private final List<Dialog> dialogs;
+    private final AtomicBoolean isLoaded = new AtomicBoolean(false);
 
     private int dialogsCount = 0;
 
     public DialogsFragmentPresenter() {
-        token = sharedPreferences.getString(App.TOKEN_KEY, "");
-        dialogs = new ArrayList<>();
+        this.token = this.sharedPreferences.getString(App.TOKEN_KEY, "");
+        this.dialogs = new ArrayList<>();
         loadDialogs();
     }
 
     @Override
     protected void createComponent() {
-        DialogsFragmentComponent component = DaggerDialogsFragmentComponent.builder()
+        final DialogsFragmentComponent component = DaggerDialogsFragmentComponent.builder()
                 .appComponent(App.getComponent())
                 .build();
         component.inject(this);
     }
 
     public List<Dialog> getDialogs() {
-        return new ArrayList<>(dialogs);
+        return new ArrayList<>(this.dialogs);
     }
 
     public void loadMoreDialogs() {
-        if (apiExecutor.isOnline()) {
-            getDialogs(dialogs.size()).subscribe((dialogsResult, e) -> {
+        if (this.apiService.isOnline()) {
+            getDialogs(this.dialogs.size()).subscribe((dialogsResult, e) -> {
                 if (checkResult(dialogsResult)) {
-                    getViewState().doOnLoadMore(dialogsResult, dialogsCount);
+                    getViewState().doOnLoadMore(dialogsResult, this.dialogsCount);
                 }
             });
         }
     }
 
     private void loadDialogs() {
-        if (apiExecutor.isOnline()) {
+        if (this.apiService.isOnline()) {
             getDialogs(0).subscribe(dialogsResult -> {
                 if (checkResult(dialogsResult)) {
-                    isLoaded = true;
-                    getViewState().doOnLoaded(dialogsResult, dialogsCount);
+                    this.isLoaded.set(true);
+                    getViewState().doOnLoaded(dialogsResult, this.dialogsCount);
                 }
             }, e -> checkToken());
         } else {
@@ -93,12 +97,12 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
     }
 
     public void updateDialogs() {
-        if (isLoaded) {
-            if (apiExecutor.isOnline()) {
+        if (this.isLoaded.get()) {
+            if (this.apiService.isOnline()) {
                 getDialogs(0).subscribe(dialogsResult -> {
-                    dialogs.clear();
+                    this.dialogs.clear();
                     if (checkResult(dialogsResult)) {
-                        getViewState().doOnUpdate(dialogsResult, dialogsCount);
+                        getViewState().doOnUpdate(dialogsResult, this.dialogsCount);
                         getViewState().hideRefreshLayoutProgressBar();
                     }
                 }, e -> checkToken());
@@ -108,8 +112,8 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
         }
     }
 
-    private boolean checkResult(List<Dialog> dialogs) {
-        if (dialogsCount != 0) {
+    private boolean checkResult(final List<Dialog> dialogs) {
+        if (this.dialogsCount != 0) {
             this.dialogs.addAll(dialogs);
             return true;
         } else {
@@ -119,7 +123,7 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
     }
 
     private void checkToken() {
-        apiExecutor.checkTokenObservable(token, secretKey, appId)
+        this.apiService.checkTokenObservable(this.token, this.secretKey, this.appId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aBoolean -> {
                     if (!aBoolean) {
@@ -128,11 +132,11 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
                 });
     }
 
-    private Single<List<Dialog>> getDialogs(int offset) {
-        return apiExecutor.getDialogsListObservable(token, offset)
+    private Single<List<Dialog>> getDialogs(final int offset) {
+        return this.apiService.getDialogsListObservable(this.token, offset)
                 .retry(3)
                 .flatMap(dialogList -> {
-                    dialogsCount = dialogList.getData().getCount();
+                    this.dialogsCount = dialogList.getData().getCount();
                     return Observable.fromIterable(dialogList.getData().getItems());
                 })
                 .map(this::createDialog)
@@ -140,9 +144,9 @@ public class DialogsFragmentPresenter extends BasePresenter<DialogsFragmentView>
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private Dialog createDialog(DialogList.Item item) {
-        long date = item.getDate() * 1000;
-        String dateText = Util.getAdvancedDateText(date, todayText, yesterdayText);
+    private Dialog createDialog(final DialogList.Item item) {
+        final long date = item.getDate() * 1000;
+        final String dateText = Util.getAdvancedDateText(date, this.todayText, this.yesterdayText);
         return new Dialog(item.getId(), item.getTitle(), item.getPhoto(), date, dateText);
     }
 }
