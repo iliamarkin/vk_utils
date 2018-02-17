@@ -34,7 +34,7 @@ public class ApiService {
     private final RestService restService;
     private final Context context;
 
-    public ApiService(RestService restService, Context context) {
+    public ApiService(final RestService restService, final Context context) {
         this.restService = restService;
         this.context = context;
     }
@@ -141,7 +141,7 @@ public class ApiService {
      * @param id    companion's id
      * @return first date of message
      */
-    public long getFirstDate(String token, int id) {
+    public long getFirstDate(final String token, final int id) {
         return getDate(token, id, Direction.FIRST);
     }
 
@@ -152,7 +152,7 @@ public class ApiService {
      * @param id    companion's id
      * @return last date of message
      */
-    public long getLastDate(String token, int id) {
+    public long getLastDate(final String token, final int id) {
         return getDate(token, id, Direction.LAST);
     }
 
@@ -166,7 +166,7 @@ public class ApiService {
      */
     private long getDate(@NonNull final String token,
                          final int id,
-                         @NonNull Direction direction) {
+                         @NonNull final Direction direction) {
         try {
             final int rev = calculateRev(direction);
             final Response<History> response = this.restService
@@ -183,7 +183,7 @@ public class ApiService {
                     .map(History.Item::getDate)
                     .map(date -> date * 1000)
                     .orElse(-1L);
-        } catch (IOException ignore) {
+        } catch (final IOException ignore) {
         }
         return -1L;
     }
@@ -253,7 +253,7 @@ public class ApiService {
 
                 return DataObject.of(date, count);
             }
-        } catch (IOException ignore) {
+        } catch (final IOException ignore) {
         }
         return DataObject.of(-1L, -1);
     }
@@ -293,7 +293,7 @@ public class ApiService {
             if (response.isSuccessful()) {
                 return response.body();
             }
-        } catch (IOException ignore) {
+        } catch (final IOException ignore) {
         }
         return null;
     }
@@ -322,12 +322,12 @@ public class ApiService {
                 .collect(Collectors.groupingBy(i -> i, Collectors.counting()));
 
         //request is broken
-        if (counts.isEmpty() || counts.size() != 2) {
+        if (counts.isEmpty() || counts.size() > 2) {
             return null;
         }
 
-        final Long incomingCount = counts.get(0);
-        final Long outgoingCount = counts.get(1);
+        final Long incomingCount = Optional.ofNullable(counts.get(0)).orElse(0L);
+        final Long outgoingCount = Optional.ofNullable(counts.get(1)).orElse(0L);
 
         return DataObject.of(incomingCount, outgoingCount);
     }
